@@ -14,7 +14,7 @@ import java.util.Locale;
 
 public class SearchActivity extends AppCompatActivity {
 
-    private List<String> items = Arrays.asList("생수", "사과", "화장지", "과일", "생활용품");
+    private List<String> items = Arrays.asList("생수", "사과", "바나나", "화장지", "과일", "음료", "육류", "반찬", "의류", "생활용품", "육아용품");
 
 
     @Override
