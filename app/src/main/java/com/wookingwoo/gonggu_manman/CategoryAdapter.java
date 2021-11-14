@@ -1,5 +1,6 @@
 package com.wookingwoo.gonggu_manman;
 
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -38,11 +39,14 @@ public class CategoryAdapter extends RecyclerView.Adapter<CategoryAdapter.Custom
         holder.iv_category.setImageResource(arrayList.get(position).getIv_category());
 
         holder.itemView.setTag(position);
+
         holder.itemView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 String curName = holder.tv_name.getText().toString();
                 Toast.makeText(view.getContext(), curName, Toast.LENGTH_SHORT).show();
+
+                Log.i("category", "onClick: " + curName);
             }
         });
 
@@ -51,8 +55,10 @@ public class CategoryAdapter extends RecyclerView.Adapter<CategoryAdapter.Custom
 
             @Override
             public boolean onLongClick(View view) {
+                String curName = holder.tv_name.getText().toString();
 
                 Toast.makeText(view.getContext(), "롱클릭", Toast.LENGTH_SHORT).show();
+                Log.i("category", "LongClick: " + curName);
 
                 return true;
             }
