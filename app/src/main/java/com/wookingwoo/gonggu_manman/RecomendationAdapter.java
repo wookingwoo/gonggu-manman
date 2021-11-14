@@ -13,19 +13,19 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import java.util.ArrayList;
 
-public class CategoryAdapter extends RecyclerView.Adapter<CategoryAdapter.CustomViewHolder> {
+public class RecomendationAdapter extends RecyclerView.Adapter<RecomendationAdapter.CustomViewHolder> {
 
-    private ArrayList<Category> arrayList;
+    private ArrayList<Recomendation> arrayList;
 
-    public CategoryAdapter(ArrayList<Category> arrayList) {
+    public RecomendationAdapter(ArrayList<Recomendation> arrayList) {
         this.arrayList = arrayList;
     }
 
     @NonNull
     @Override
-    public CategoryAdapter.CustomViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+    public RecomendationAdapter.CustomViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
 
-        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.category_home, parent, false);
+        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.recomendation_home, parent, false);
         CustomViewHolder holder = new CustomViewHolder(view);
 
 
@@ -33,20 +33,21 @@ public class CategoryAdapter extends RecyclerView.Adapter<CategoryAdapter.Custom
     }
 
     @Override
-    public void onBindViewHolder(@NonNull CategoryAdapter.CustomViewHolder holder, int position) {
+    public void onBindViewHolder(@NonNull RecomendationAdapter.CustomViewHolder holder, int position) {
 
-        holder.tv_name.setText(arrayList.get(position).getName());
-        holder.iv_category.setImageResource(arrayList.get(position).getIv_category());
+        holder.iv_image.setImageResource(arrayList.get(position).getIv_image());
+        holder.tv_title.setText(arrayList.get(position).getTitle());
+        holder.tv_price.setText(arrayList.get(position).getPrice());
 
         holder.itemView.setTag(position);
 
         holder.itemView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                String curName = holder.tv_name.getText().toString();
+                String curName = holder.tv_title.getText().toString();
                 Toast.makeText(view.getContext(), curName, Toast.LENGTH_SHORT).show();
 
-                Log.i("category", "onClick: " + curName);
+                Log.i("Recomendation", "onClick: " + curName);
             }
         });
 
@@ -55,10 +56,10 @@ public class CategoryAdapter extends RecyclerView.Adapter<CategoryAdapter.Custom
 
             @Override
             public boolean onLongClick(View view) {
-                String curName = holder.tv_name.getText().toString();
+                String curName = holder.tv_title.getText().toString();
 
                 Toast.makeText(view.getContext(), "롱클릭", Toast.LENGTH_SHORT).show();
-                Log.i("category", "LongClick: " + curName);
+                Log.i("Recomendation", "LongClick: " + curName);
 
                 return true;
             }
@@ -74,15 +75,17 @@ public class CategoryAdapter extends RecyclerView.Adapter<CategoryAdapter.Custom
     public class CustomViewHolder extends RecyclerView.ViewHolder {
 
 
-        protected ImageView iv_category;
-        protected TextView tv_name;
+        protected ImageView iv_image;
+        protected TextView tv_title;
+        protected TextView tv_price;
 
 
         public CustomViewHolder(@NonNull View itemView) {
             super(itemView);
 
-            this.iv_category = (ImageView) itemView.findViewById(R.id.item_image);
-            this.tv_name = (TextView) itemView.findViewById(R.id.title);
+            this.iv_image = (ImageView) itemView.findViewById(R.id.item_image);
+            this.tv_title = (TextView) itemView.findViewById(R.id.title);
+            this.tv_price = (TextView) itemView.findViewById(R.id.price);
         }
     }
 }

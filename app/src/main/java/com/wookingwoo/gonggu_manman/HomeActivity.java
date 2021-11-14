@@ -23,6 +23,12 @@ public class HomeActivity extends AppCompatActivity {
     private LinearLayoutManager linearLayoutManager;
 
 
+    private ArrayList<Recomendation> recomendationArrayList;
+    private RecomendationAdapter recomendationAdapter;
+    private RecyclerView recomendationRecyclerView;
+    private LinearLayoutManager recomendationLinearLayoutManager;
+
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -52,7 +58,7 @@ public class HomeActivity extends AppCompatActivity {
         });
 
 
-
+// Category View
         recyclerView = (RecyclerView) findViewById(R.id.category_view);
         linearLayoutManager = new LinearLayoutManager(this);
         recyclerView.setLayoutManager(linearLayoutManager);
@@ -61,7 +67,7 @@ public class HomeActivity extends AppCompatActivity {
 
         categoryAdapter = new CategoryAdapter(arrayList);
         recyclerView.setAdapter(categoryAdapter);
-        recyclerView.setLayoutManager(new LinearLayoutManager(this, RecyclerView.HORIZONTAL, false));	// 가로로 배치
+        recyclerView.setLayoutManager(new LinearLayoutManager(this, RecyclerView.HORIZONTAL, false));    // 가로로 배치
 
 
         Category category1 = new Category(R.drawable.fruits, "Fruits");
@@ -76,6 +82,30 @@ public class HomeActivity extends AppCompatActivity {
 
         categoryAdapter.notifyDataSetChanged();
 
+// Recomendation View
+        recomendationRecyclerView = (RecyclerView) findViewById(R.id.recommendation_view);
+        recomendationLinearLayoutManager = new LinearLayoutManager(this);
+        recomendationRecyclerView.setLayoutManager(recomendationLinearLayoutManager);
+
+        recomendationArrayList = new ArrayList<>();
+
+        recomendationAdapter = new RecomendationAdapter(recomendationArrayList);
+        recomendationRecyclerView.setAdapter(recomendationAdapter);
+        recomendationRecyclerView.setLayoutManager(new LinearLayoutManager(this, RecyclerView.HORIZONTAL, false));    // 가로로 배치
+
+
+        Recomendation recommendation1 = new Recomendation(R.drawable.ic_baseline_image_24, "삼다수 2L 6병", "2600원");
+        Recomendation recommendation2 = new Recomendation(R.drawable.ic_baseline_image_24, "사과 5알", "1900원");
+        Recomendation recommendation3 = new Recomendation(R.drawable.ic_baseline_image_24, "화장지 5개", "1100원");
+        Recomendation recommendation4 = new Recomendation(R.drawable.ic_baseline_image_24, "상추 10장", "360원");
+
+        recomendationArrayList.add(recommendation1);
+        recomendationArrayList.add(recommendation2);
+        recomendationArrayList.add(recommendation3);
+        recomendationArrayList.add(recommendation4);
+
+
+        recomendationAdapter.notifyDataSetChanged();
 
     }
 }
