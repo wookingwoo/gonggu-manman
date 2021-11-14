@@ -1,6 +1,9 @@
 package com.wookingwoo.gonggu_manman;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.content.ContextCompat;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -8,8 +11,10 @@ import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageButton;
+import android.widget.ListView;
 
 public class HomeActivity extends AppCompatActivity {
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -33,15 +38,23 @@ public class HomeActivity extends AppCompatActivity {
 
             @Override
             public void onClick(View view) {
-
                 Intent searchIntent = new Intent(getApplicationContext(), SearchActivity.class);
                 searchIntent.putExtra("isFocusSearchbar", true);
                 startActivity(searchIntent);
-
-
             }
         });
 
 
+        ListView lv = findViewById(R.id.category_list);
+        CategoryList categoryAdapter = new CategoryList();
+
+//        lv.setLayoutManager(new LinearLayoutManager(this, RecyclerView.HORIZONTAL, false));	// 가로
+
+
+        lv.setAdapter(categoryAdapter);
+        categoryAdapter.addCategory("Fruits", ContextCompat.getDrawable(this, R.drawable.ic_baseline_image_24));
+        categoryAdapter.addCategory("Veggie", ContextCompat.getDrawable(this, R.drawable.ic_baseline_image_24));
+        categoryAdapter.addCategory("Meat", ContextCompat.getDrawable(this, R.drawable.ic_baseline_image_24));
+        categoryAdapter.addCategory("daily necessities", ContextCompat.getDrawable(this, R.drawable.ic_baseline_image_24));
     }
 }
