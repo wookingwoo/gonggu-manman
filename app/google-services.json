@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "933488319433",
+    "project_id": "gonggu-manman",
+    "storage_bucket": "gonggu-manman.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:933488319433:android:c45ed72402b93d1d382618",
+        "android_client_info": {
+          "package_name": "com.wookingwoo.gonggu_manman"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "933488319433-2ilu3emutcjsn8kv7f8us10f9k57em0j.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCmMtgse1VurRbDZpewvmKWqH2AvDsJuGg"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "933488319433-2ilu3emutcjsn8kv7f8us10f9k57em0j.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
