@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "241312884112",
+    "project_id": "test-cdef0",
+    "storage_bucket": "test-cdef0.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:241312884112:android:439f2744d1d7452e98ff15",
+        "android_client_info": {
+          "package_name": "com.wookingwoo.gonggu_manman"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "241312884112-tgpce1s7q9iq3koar4909v4h1lbjbunv.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAUjvzqObYd7b1vXolT6iOphB9oD4QM27Q"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "241312884112-tgpce1s7q9iq3koar4909v4h1lbjbunv.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

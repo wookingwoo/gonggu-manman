@@ -1,3 +1,11 @@
 <resources>
     <string name="app_name">gonggu-manman</string>
+    <string name="user_name">user</string>
+    <string name="total_num">50</string>
+    <string name="present_num">10 / </string>
+    <string name="gonggu">공구</string>
+    <string name="heart"> 찜하기</string>
+    <string name="title">Title</string>
+    <string name="context">context</string>
+    <string name="join">JOIN</string>
 </resources>
