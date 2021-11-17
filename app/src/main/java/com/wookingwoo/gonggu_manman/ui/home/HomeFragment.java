@@ -19,6 +19,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.wookingwoo.gonggu_manman.Category;
 import com.wookingwoo.gonggu_manman.CategoryAdapter;
+import com.wookingwoo.gonggu_manman.PostActivity;
 import com.wookingwoo.gonggu_manman.R;
 import com.wookingwoo.gonggu_manman.Recomendation;
 import com.wookingwoo.gonggu_manman.RecomendationAdapter;
@@ -50,13 +51,6 @@ public class HomeFragment extends Fragment {
 
         View v = inflater.inflate(R.layout.fragment_home, container, false);
 
-        Button postButton = (Button) findViewById(R.id.post_btn);
-        postButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                startActivity(new Intent(getApplicationContext(), PostActivity.class));
-            }
-        });
 
         Button searchButton = (Button) v.findViewById(R.id.search_btn);
         searchButton.setOnClickListener(new View.OnClickListener() {
