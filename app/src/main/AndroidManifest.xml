@@ -9,6 +9,7 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.Gonggumanman">
+        <activity android:name=".PostActivity"/>
 
         <activity
             android:name=".BottomNavigationActivity"
@@ -16,10 +17,10 @@
             android:label="@string/title_activity_bottom_navigation">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
+
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-
         <activity
             android:name=".SearchActivity"
             android:exported="false" />
