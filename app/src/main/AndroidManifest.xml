@@ -9,6 +9,7 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.Gonggumanman">
+
         <activity
             android:name=".BottomNavigationActivity"
             android:exported="true"
@@ -23,9 +24,6 @@
             android:name=".SearchActivity"
             android:exported="false" />
 
-        <activity
-            android:name=".HomeActivity"
-            android:exported="true"></activity>
     </application>
 
 </manifest>
