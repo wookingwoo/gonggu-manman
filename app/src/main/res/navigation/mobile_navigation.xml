@@ -18,8 +18,8 @@
         tools:layout="@layout/fragment_search" />
 
     <fragment
-        android:id="@+id/navigation_notifications"
-        android:name="com.wookingwoo.gonggu_manman.ui.notifications.NotificationsFragment"
+        android:id="@+id/navigation_create"
+        android:name="com.wookingwoo.gonggu_manman.ui.create.CreateFragment"
         android:label="@string/title_create"
-        tools:layout="@layout/fragment_notifications" />
+        tools:layout="@layout/fragment_create" />
 </navigation>

@@ -1,4 +1,4 @@
-package com.wookingwoo.gonggu_manman.ui.notifications;
+package com.wookingwoo.gonggu_manman.ui.create;
 
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -12,24 +12,23 @@ import androidx.fragment.app.Fragment;
 import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProvider;
 
-import com.wookingwoo.gonggu_manman.R;
-import com.wookingwoo.gonggu_manman.databinding.FragmentNotificationsBinding;
+import com.wookingwoo.gonggu_manman.databinding.FragmentCreateBinding;
 
-public class NotificationsFragment extends Fragment {
+public class CreateFragment extends Fragment {
 
-    private NotificationsViewModel notificationsViewModel;
-    private FragmentNotificationsBinding binding;
+    private CreateViewModel createViewModel;
+    private FragmentCreateBinding binding;
 
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
-        notificationsViewModel =
-                new ViewModelProvider(this).get(NotificationsViewModel.class);
+        createViewModel =
+                new ViewModelProvider(this).get(CreateViewModel.class);
 
-        binding = FragmentNotificationsBinding.inflate(inflater, container, false);
+        binding = FragmentCreateBinding.inflate(inflater, container, false);
         View root = binding.getRoot();
 
-        final TextView textView = binding.textNotifications;
-        notificationsViewModel.getText().observe(getViewLifecycleOwner(), new Observer<String>() {
+        final TextView textView = binding.textCreate;
+        createViewModel.getText().observe(getViewLifecycleOwner(), new Observer<String>() {
             @Override
             public void onChanged(@Nullable String s) {
                 textView.setText(s);
