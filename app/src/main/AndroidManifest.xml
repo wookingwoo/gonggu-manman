@@ -9,6 +9,7 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.Gonggumanman">
+        <activity android:name=".PostActivity"/>
         <activity
             android:name=".SearchActivity"
             android:exported="false" />

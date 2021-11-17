@@ -34,6 +34,13 @@ public class HomeActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_home);
 
+        Button postButton = (Button) findViewById(R.id.post_btn);
+        postButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                startActivity(new Intent(getApplicationContext(), PostActivity.class));
+            }
+        });
 
         Button searchButton = (Button) findViewById(R.id.search_btn);
         searchButton.setOnClickListener(new View.OnClickListener() {
