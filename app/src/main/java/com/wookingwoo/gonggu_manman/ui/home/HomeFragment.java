@@ -1,21 +1,34 @@
-package com.wookingwoo.gonggu_manman;
-
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.core.content.ContextCompat;
-import androidx.recyclerview.widget.LinearLayoutManager;
-import androidx.recyclerview.widget.RecyclerView;
+package com.wookingwoo.gonggu_manman.ui.home;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.util.Log;
+import android.view.LayoutInflater;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.ImageButton;
-import android.widget.ListView;
+import android.widget.TextView;
+
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+import androidx.fragment.app.Fragment;
+import androidx.lifecycle.Observer;
+import androidx.lifecycle.ViewModelProvider;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
+
+import com.wookingwoo.gonggu_manman.Category;
+import com.wookingwoo.gonggu_manman.CategoryAdapter;
+import com.wookingwoo.gonggu_manman.R;
+import com.wookingwoo.gonggu_manman.Recomendation;
+import com.wookingwoo.gonggu_manman.RecomendationAdapter;
+import com.wookingwoo.gonggu_manman.SearchActivity;
+import com.wookingwoo.gonggu_manman.databinding.FragmentHomeBinding;
 
 import java.util.ArrayList;
 
-public class HomeActivity extends AppCompatActivity {
+public class HomeFragment extends Fragment {
+
 
     private ArrayList<Category> arrayList;
     private CategoryAdapter categoryAdapter;
@@ -29,29 +42,32 @@ public class HomeActivity extends AppCompatActivity {
     private LinearLayoutManager recomendationLinearLayoutManager;
 
 
-    @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_home);
+    private FragmentHomeBinding binding; // binding 삭제 금지
+
+    public View onCreateView(@NonNull LayoutInflater inflater,
+                             ViewGroup container, Bundle savedInstanceState) {
 
 
-        Button searchButton = (Button) findViewById(R.id.search_btn);
+        View v = inflater.inflate(R.layout.fragment_home, container, false);
+
+
+        Button searchButton = (Button) v.findViewById(R.id.search_btn);
         searchButton.setOnClickListener(new View.OnClickListener() {
 
             @Override
             public void onClick(View view) {
-                Intent searchIntent = new Intent(getApplicationContext(), SearchActivity.class);
+                Intent searchIntent = new Intent(getActivity().getApplicationContext(), SearchActivity.class);
                 searchIntent.putExtra("isFocusSearchbar", true);
                 startActivity(searchIntent);
             }
         });
 
-        ImageButton filterButton = (ImageButton) findViewById(R.id.filter_btn);
+        ImageButton filterButton = (ImageButton) v.findViewById(R.id.filter_btn);
         filterButton.setOnClickListener(new View.OnClickListener() {
 
             @Override
             public void onClick(View view) {
-                Intent searchIntent = new Intent(getApplicationContext(), SearchActivity.class);
+                Intent searchIntent = new Intent(getActivity().getApplicationContext(), SearchActivity.class);
                 searchIntent.putExtra("isFocusSearchbar", true);
                 startActivity(searchIntent);
             }
@@ -59,15 +75,15 @@ public class HomeActivity extends AppCompatActivity {
 
 
 // Category View
-        recyclerView = (RecyclerView) findViewById(R.id.category_view);
-        linearLayoutManager = new LinearLayoutManager(this);
+        recyclerView = (RecyclerView) v.findViewById(R.id.category_view);
+        linearLayoutManager = new LinearLayoutManager(getActivity());
         recyclerView.setLayoutManager(linearLayoutManager);
 
         arrayList = new ArrayList<>();
 
         categoryAdapter = new CategoryAdapter(arrayList);
         recyclerView.setAdapter(categoryAdapter);
-        recyclerView.setLayoutManager(new LinearLayoutManager(this, RecyclerView.HORIZONTAL, false));    // 가로로 배치
+        recyclerView.setLayoutManager(new LinearLayoutManager(getActivity(), RecyclerView.HORIZONTAL, false));    // 가로로 배치
 
 
         Category category1 = new Category(R.drawable.fruits, "Fruits");
@@ -83,15 +99,15 @@ public class HomeActivity extends AppCompatActivity {
         categoryAdapter.notifyDataSetChanged();
 
 // Recomendation View
-        recomendationRecyclerView = (RecyclerView) findViewById(R.id.recommendation_view);
-        recomendationLinearLayoutManager = new LinearLayoutManager(this);
+        recomendationRecyclerView = (RecyclerView) v.findViewById(R.id.recommendation_view);
+        recomendationLinearLayoutManager = new LinearLayoutManager(getActivity());
         recomendationRecyclerView.setLayoutManager(recomendationLinearLayoutManager);
 
         recomendationArrayList = new ArrayList<>();
 
         recomendationAdapter = new RecomendationAdapter(recomendationArrayList);
         recomendationRecyclerView.setAdapter(recomendationAdapter);
-        recomendationRecyclerView.setLayoutManager(new LinearLayoutManager(this, RecyclerView.HORIZONTAL, false));    // 가로로 배치
+        recomendationRecyclerView.setLayoutManager(new LinearLayoutManager(getActivity(), RecyclerView.HORIZONTAL, false));    // 가로로 배치
 
 
         Recomendation recommendation1 = new Recomendation(R.drawable.ic_baseline_image_24, "삼다수 2L 6병", "2600원");
@@ -107,5 +123,13 @@ public class HomeActivity extends AppCompatActivity {
 
         recomendationAdapter.notifyDataSetChanged();
 
+
+        return v;
+    }
+
+    @Override
+    public void onDestroyView() {
+        super.onDestroyView();
+        binding = null;
     }
 }

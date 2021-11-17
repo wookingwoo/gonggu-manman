@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/mobile_navigation"
+    app:startDestination="@+id/navigation_home">
+
+    <fragment
+        android:id="@+id/navigation_home"
+        android:name="com.wookingwoo.gonggu_manman.ui.home.HomeFragment"
+        android:label="@string/title_home"
+        tools:layout="@layout/fragment_home" />
+
+    <fragment
+        android:id="@+id/navigation_search"
+        android:name="com.wookingwoo.gonggu_manman.ui.search.SearchFragment"
+        android:label="@string/title_search"
+        tools:layout="@layout/fragment_search" />
+
+    <fragment
+        android:id="@+id/navigation_create"
+        android:name="com.wookingwoo.gonggu_manman.ui.create.CreateFragment"
+        android:label="@string/title_create"
+        tools:layout="@layout/fragment_create" />
+
+    <fragment
+        android:id="@+id/navigation_mypage"
+        android:name="com.wookingwoo.gonggu_manman.ui.mypage.MypageFragment"
+        android:label="@string/title_mypage"
+        tools:layout="@layout/fragment_create" />
+
+    <fragment
+        android:id="@+id/navigation_community"
+        android:name="com.wookingwoo.gonggu_manman.ui.community.CommunityFragment"
+        android:label="@string/title_community"
+        tools:layout="@layout/fragment_community" />
+</navigation>
