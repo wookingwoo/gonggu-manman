@@ -22,4 +22,10 @@
         android:name="com.wookingwoo.gonggu_manman.ui.create.CreateFragment"
         android:label="@string/title_create"
         tools:layout="@layout/fragment_create" />
+
+    <fragment
+        android:id="@+id/navigation_mypage"
+        android:name="com.wookingwoo.gonggu_manman.ui.mypage.MypageFragment"
+        android:label="@string/title_mypage"
+        tools:layout="@layout/fragment_create" />
 </navigation>
