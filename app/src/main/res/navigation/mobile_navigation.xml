@@ -28,4 +28,10 @@
         android:name="com.wookingwoo.gonggu_manman.ui.mypage.MypageFragment"
         android:label="@string/title_mypage"
         tools:layout="@layout/fragment_create" />
+
+    <fragment
+        android:id="@+id/navigation_community"
+        android:name="com.wookingwoo.gonggu_manman.ui.community.CommunityFragment"
+        android:label="@string/title_community"
+        tools:layout="@layout/fragment_community" />
 </navigation>
