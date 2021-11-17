@@ -19,6 +19,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.wookingwoo.gonggu_manman.Category;
 import com.wookingwoo.gonggu_manman.CategoryAdapter;
+import com.wookingwoo.gonggu_manman.PostActivity;
 import com.wookingwoo.gonggu_manman.R;
 import com.wookingwoo.gonggu_manman.Recomendation;
 import com.wookingwoo.gonggu_manman.RecomendationAdapter;
