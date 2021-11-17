@@ -28,7 +28,7 @@
         app:civ_border_overlay="true"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/imageView2"
-        tools:ignore="ImageContrastCheck" />
+         />
 
     <TextView
         android:id="@+id/textView"

@@ -1,5 +1,13 @@
 <resources>
-    <string name="app_name">gonggu-manman</string>
+    <string name="app_name">뭉싸</string>
+    <string name="title_activity_bottom_navigation">BottomNavigationActivity</string>
+    <string name="title_home">Home</string>
+    <string name="title_dashboard">Dashboard</string>
+    <string name="title_notifications">Notifications</string>
+    <string name="title_mypage">me</string>
+    <string name="title_community">community</string>
+    <string name="title_create">create</string>
+    <string name="title_search">search</string>
     <string name="user_name">user</string>
     <string name="total_num">50</string>
     <string name="present_num">10 / </string>
