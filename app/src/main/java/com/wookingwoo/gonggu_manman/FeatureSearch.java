@@ -25,7 +25,7 @@ public class MainActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
+        setContentView(R.layout.fragment_search);
 
         final Spinner spin1 = (Spinner)findViewById(R.id.spinner);
         final Spinner spin2 = (Spinner)findViewById(R.id.spinner2);
@@ -74,11 +74,6 @@ public class MainActivity extends AppCompatActivity {
             public void onNothingSelected(AdapterView<?> adapterView) {
             }
         });
-
-
-
-
-
 
         recyclerView = (RecyclerView) findViewById((R.id.rv));
         linearLayoutManager = new LinearLayoutManager(this);

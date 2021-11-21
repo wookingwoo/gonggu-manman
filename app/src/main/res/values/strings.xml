@@ -1,68 +1,19 @@
 <resources>
-    <string name="app_name">gonggu-manman</string>
-    <string-array name = "area">
-        <item>선택</item>
-        <item>경기도</item>
-        <item>서울특별시</item>
-        <item>인천광역시</item>
-        <item>울산광역시</item>
-    </string-array>
-    <string-array name = "seoul">
-        <item>강남구</item>
-        <item>강동구</item>
-        <item>강북구</item>
-        <item>강서구</item>
-        <item>관악구</item>
-    </string-array>
-    <string-array name = "incheon">
-        <item>강화군</item>
-        <item>계양구</item>
-        <item>남구</item>
-        <item>남동구</item>
-        <item>동구</item>
-        <item>부평구</item>
-    </string-array>
-    <string-array name="shop">
-        <item>선택</item>
-        <item>식품</item>
-        <item>뷰티</item>
-        <item>주방용품</item>
-        <item>생활용품</item>
-        <item>홈인테리어</item>
-        <item>가전디지털</item>
-        <item>문구/오피스</item>
-        <item>헬스/건강식품</item>
-    </string-array>
-    <string-array name="food">
-        <item>과일</item>
-        <item>견과/건과</item>
-        <item>채소</item>
-        <item>쌀/잡곡</item>
-        <item>축산/계란</item>
-        <item>수산물/건어물</item>
-        <item>생수/음료</item>
-        <item>커피/원두/차</item>
-        <item>과자/초콜릿/시리얼</item>
-        <item>면/통조림/가공식품</item>
-        <item>가루/조미료/오일</item>
-        <item>장/소스/드레싱/식초</item>
-        <item>유제품/아이스크림</item>
-        <item>냉장/냉동/간편요리</item>
-    </string-array>
-    <string-array name="beauty">
-        <item>명품뷰티</item>
-        <item>스킨케어</item>
-        <item>클렌징/필링</item>
-        <item>더마코스메틱</item>
-        <item>메이크업</item>
-        <item>향수</item>
-        <item>남성화장품</item>
-        <item>네일</item>
-        <item>뷰티소품</item>
-        <item>어린이화장품</item>
-        <item>로드샵</item>
-        <item>헤어</item>
-        <item>바디</item>
-        <item>선물세트/키트</item>
-    </string-array>
+    <string name="app_name">뭉싸</string>
+    <string name="title_activity_bottom_navigation">BottomNavigationActivity</string>
+    <string name="title_home">Home</string>
+    <string name="title_dashboard">Dashboard</string>
+    <string name="title_notifications">Notifications</string>
+    <string name="title_mypage">me</string>
+    <string name="title_community">community</string>
+    <string name="title_create">create</string>
+    <string name="title_search">search</string>
+    <string name="user_name">user</string>
+    <string name="total_num">50</string>
+    <string name="present_num">10 / </string>
+    <string name="gonggu">공구</string>
+    <string name="heart"> 찜하기</string>
+    <string name="title">Title</string>
+    <string name="context">context</string>
+    <string name="join">공구참여</string>
 </resources>
