@@ -40,6 +40,7 @@ public class PostActivity extends AppCompatActivity {
     FirebaseAuth firebaseAuth;
     TextInputEditText title, recruit, detail;
     TextView category;
+    EditText imgUrl;
     Spinner spinnerCate;
     Button saveBtn;
     String userUid;
@@ -59,8 +60,6 @@ public class PostActivity extends AppCompatActivity {
         detail = (TextInputEditText) findViewById(R.id.post_detail);
         imgUrl = (EditText) findViewById(R.id.post_imgUrl);
         saveBtn = (Button) findViewById(R.id.post_save);
-
-
 
         List<String> cateList = new ArrayList<>();
 
@@ -113,11 +112,9 @@ public class PostActivity extends AppCompatActivity {
         final String cateStr = category.getText().toString();
         final String recruitStr = recruit.getText().toString().trim();
         final String detailStr = detail.getText().toString();
-        final String imgStr = "";
+        final String imgStr = imgUrl.getText().toString();
         final String joinStr = "1";
         final String writer = userUid;
-
-        Toast.makeText(PostActivity.this, titleStr + cateStr + recruitStr + detailStr, Toast.LENGTH_SHORT).show();
 
         CreateInfo createInfo = new CreateInfo(titleStr, cateStr, joinStr, recruitStr, detailStr, imgStr, writer);
         uploader(createInfo);
@@ -129,6 +126,7 @@ public class PostActivity extends AppCompatActivity {
                 .addOnSuccessListener(new OnSuccessListener<DocumentReference>() {
                     @Override
                     public void onSuccess(DocumentReference documentReference) {
+                        Toast.makeText(PostActivity.this, "게시물 등록 성공!", Toast.LENGTH_SHORT).show();
                         Log.d(TAG, "게시물이 등록되었습니다!");
 
                     }
@@ -136,6 +134,7 @@ public class PostActivity extends AppCompatActivity {
                 .addOnFailureListener(new OnFailureListener() {
                     @Override
                     public void onFailure(@NonNull Exception e) {
+                        Toast.makeText(PostActivity.this, "게시물 등록 실패!" + e, Toast.LENGTH_SHORT).show();
                         Log.w(TAG, "게시물 등록 실패!", e);
                     }
                 });
