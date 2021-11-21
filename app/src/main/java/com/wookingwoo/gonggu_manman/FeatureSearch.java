@@ -14,7 +14,7 @@ import android.widget.Spinner;
 import java.util.ArrayList;
 
 public class FeatureSearch extends AppCompatActivity {
-
+//    뾰로로롱
     ArrayAdapter<CharSequence> adspin1, adspin2;
 
     private ArrayList<SearchData> arrayList;
