@@ -128,6 +128,7 @@ public class PostActivity extends AppCompatActivity {
                     public void onSuccess(DocumentReference documentReference) {
                         Toast.makeText(PostActivity.this, "게시물 등록 성공!", Toast.LENGTH_SHORT).show();
                         Log.d(TAG, "게시물이 등록되었습니다!");
+                        startActivity(new Intent(getApplicationContext(), BottomNavigationActivity.class));
 
                     }
                 })
