@@ -7,6 +7,7 @@ import android.widget.Spinner;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.google.android.material.chip.Chip;
 import com.google.android.material.textfield.TextInputEditText;
 import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.FirebaseFirestore;
@@ -38,7 +39,22 @@ public class PostActivity extends AppCompatActivity {
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         spinnerMain.setAdapter(adapter);
 
-        
+    }
 
+    private void uploadData() {
+        final String titleStr = title.getText().toString();
+        final String recruitStr = recruit.getText().toString().trim();
+        final String detailStr = detail.getText().toString();
+        final String joinStr = "0";
+
+        CreateInfo createInfo = new CreateInfo(titleStr, joinStr, recruitStr, detailStr);
+        uploader(createInfo);
+
+
+
+    }
+
+    private void uploader(CreateInfo createInfo) {
+//        firebaseFirestore.collection("products").
     }
 }

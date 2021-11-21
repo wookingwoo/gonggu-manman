@@ -1,0 +1,91 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <EditText
+        android:id="@+id/join_email"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="10dp"
+        android:hint="이메일"
+        android:minHeight="48dp"></EditText>
+
+    <EditText
+        android:id="@+id/join_password"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="10dp"
+        android:layout_marginBottom="0dp"
+        android:hint="비밀번호"
+        android:inputType="textPassword"
+        android:minHeight="48dp"></EditText>
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="10dp"
+        android:layout_marginTop="0dp"
+        android:text="※ 숫자, 문자, 특수문자 중 2가지 필수 포함(8~15자)"></TextView>
+
+    <EditText
+        android:id="@+id/join_name"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="10dp"
+        android:hint="이름"
+        android:minHeight="48dp"></EditText>
+
+    <EditText
+        android:id="@+id/join_phone"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="10dp"
+        android:hint="핸드폰 번호"
+        android:minHeight="48dp"></EditText>
+
+    <EditText
+        android:id="@+id/join_address"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="10dp"
+        android:hint="주소"
+        android:minHeight="48dp"></EditText>
+
+    <TextView
+        android:id="@+id/join_clause"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="10dp"
+        android:text="개인 정보 사용 동의 관련"></TextView>
+
+    <RadioGroup
+        android:id="@+id/join_radioGroup"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="10dp"
+        android:orientation="horizontal">
+
+        <RadioButton
+            android:id="@+id/join_clauseaccept"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="동의함" />
+
+        <RadioButton
+            android:id="@+id/join_clausedecline"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="동의하지 않음" />
+    </RadioGroup>
+
+    <Button
+        android:id="@+id/join_submit"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="회원가입"></Button>
+
+</LinearLayout>
