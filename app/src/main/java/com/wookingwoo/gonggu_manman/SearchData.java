@@ -1,6 +1,6 @@
 package com.wookingwoo.gonggu_manman;
 
-public class MainData {
+public class SearchData {
     private int iv_image;
     private String name;
     private String name2;
@@ -9,7 +9,7 @@ public class MainData {
     private String name5;
     private String name6;
 
-    public MainData(int iv_image, String name, String name2, String name3, String name4, String name5, String name6) {
+    public SearchData(int iv_image, String name, String name2, String name3, String name4, String name5, String name6) {
         this.iv_image = iv_image;
         this.name = name;
         this.name2 = name2;

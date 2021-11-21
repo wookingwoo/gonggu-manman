@@ -12,17 +12,17 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import java.util.ArrayList;
 
-public class MainAdapter extends RecyclerView.Adapter<MainAdapter.CustomViewHolder> {
+public class SearchAdapter extends RecyclerView.Adapter<SearchAdapter.CustomViewHolder> {
 
-    private ArrayList<MainData> arrayList;
+    private ArrayList<SearchData> arrayList;
 
-    public MainAdapter(ArrayList<MainData> arrayList) {
+    public SearchAdapter(ArrayList<SearchData> arrayList) {
         this.arrayList = arrayList;
     }
 
     @NonNull
     @Override
-    public MainAdapter.CustomViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+    public SearchAdapter.CustomViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
 
         View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.item_list,parent,false);
         CustomViewHolder holder = new CustomViewHolder(view);
@@ -31,7 +31,7 @@ public class MainAdapter extends RecyclerView.Adapter<MainAdapter.CustomViewHold
     }
 
     @Override
-    public void onBindViewHolder(@NonNull MainAdapter.CustomViewHolder holder, int position) {
+    public void onBindViewHolder(@NonNull SearchAdapter.CustomViewHolder holder, int position) {
         holder.iv_image.setImageResource(arrayList.get(position).getIv_image());
         holder.name.setText(arrayList.get(position).getName());
         holder.name2.setText(arrayList.get(position).getName2());

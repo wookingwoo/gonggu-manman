@@ -13,12 +13,12 @@ import android.widget.Spinner;
 
 import java.util.ArrayList;
 
-public class MainActivity extends AppCompatActivity {
+public class FeatureSearch extends AppCompatActivity {
 
     ArrayAdapter<CharSequence> adspin1, adspin2;
 
-    private ArrayList<MainData> arrayList;
-    private MainAdapter mainAdapter;
+    private ArrayList<SearchData> arrayList;
+    private SearchAdapter mainAdapter;
     private RecyclerView recyclerView;
     private LinearLayoutManager linearLayoutManager;
 
@@ -40,7 +40,7 @@ public class MainActivity extends AppCompatActivity {
             public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
 
                 if (adspin1.getItem(i).equals("서울특별시")) {
-                    adspin2 = ArrayAdapter.createFromResource(MainActivity.this, R.array.seoul, android.R.layout.simple_spinner_dropdown_item);
+                    adspin2 = ArrayAdapter.createFromResource(FeatureSearch.this, R.array.seoul, android.R.layout.simple_spinner_dropdown_item);
                     adspin2.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
                     spin2.setAdapter(adspin2);
                     spin2.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
@@ -55,7 +55,7 @@ public class MainActivity extends AppCompatActivity {
                 }
 
                 else if (adspin1.getItem(i).equals("인천광역시")) {
-                    adspin2 = ArrayAdapter.createFromResource(MainActivity.this, R.array.incheon, android.R.layout.simple_spinner_dropdown_item);
+                    adspin2 = ArrayAdapter.createFromResource(FeatureSearch.this, R.array.incheon, android.R.layout.simple_spinner_dropdown_item);
                     adspin2.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
                     spin2.setAdapter(adspin2);
                     spin2.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
@@ -81,14 +81,14 @@ public class MainActivity extends AppCompatActivity {
 
         arrayList = new ArrayList<>();
 
-        mainAdapter = new MainAdapter(arrayList);
+        mainAdapter = new SearchAdapter(arrayList);
         recyclerView.setAdapter(mainAdapter);
 
         Button btn1 = (Button)findViewById(R.id.btn1);
         btn1.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                MainData mainData = new MainData(R.mipmap.ic_launcher, "  제목", "카테고리", "지역", "택배/직거래","num/num", "num");
+                SearchData mainData = new SearchData(R.mipmap.ic_launcher, "  제목", "카테고리", "지역", "택배/직거래","num/num", "num");
                 arrayList.add(mainData);
                 mainAdapter.notifyDataSetChanged();
             }

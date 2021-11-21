@@ -26,7 +26,7 @@ public class SearchFragment extends Fragment {
 
         binding = FragmentSearchBinding.inflate(inflater, container, false);
         View root = binding.getRoot();
-
+/*
         final TextView textView = binding.textSearch;
         searchViewModel.getText().observe(getViewLifecycleOwner(), new Observer<String>() {
             @Override
@@ -34,6 +34,8 @@ public class SearchFragment extends Fragment {
                 textView.setText(s);
             }
         });
+
+ */
         return root;
     }
 
