@@ -1,6 +1,5 @@
 package com.wookingwoo.gonggu_manman;
 
-import android.app.Activity;
 import android.app.ProgressDialog;
 import android.content.Intent;
 import android.os.Bundle;
@@ -75,7 +74,7 @@ public class LoginActivity extends AppCompatActivity {
                             mDialog.dismiss();
                             Toast.makeText(LoginActivity.this, "로그인 성공!", Toast.LENGTH_SHORT).show();
                             FirebaseUser user = firebaseAuth.getCurrentUser();
-                            startActivity(new Intent(getApplicationContext(), PostActivity.class));
+                            startActivity(new Intent(getApplicationContext(), BottomNavigationActivity.class));
                         } else {
                             mDialog.dismiss();
                             Toast.makeText(LoginActivity.this, "로그인 실패" + task.getException().getMessage(), Toast.LENGTH_LONG).show();
