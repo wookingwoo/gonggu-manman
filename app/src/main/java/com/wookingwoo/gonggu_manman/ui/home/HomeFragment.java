@@ -144,8 +144,11 @@ public class HomeFragment extends Fragment {
                                 String documentID = (String) document.getId();
                                 Log.d("get-posts-firestore", "documentID->" + documentID);
 
-                                Recomendation recommendationFS = new Recomendation(postsImage, postsTitle, "000원", documentID);
-                                recomendationArrayList.add(recommendationFS);
+
+                                if ((postsTitle != null) && (!postsTitle.equals("")) && (postsImage != null) && (!postsImage.equals(""))) {
+                                    Recomendation recommendationFS = new Recomendation(postsImage, postsTitle, "000원", documentID);
+                                    recomendationArrayList.add(recommendationFS);
+                                }
                             }
                             recomendationAdapter.notifyDataSetChanged();
 
