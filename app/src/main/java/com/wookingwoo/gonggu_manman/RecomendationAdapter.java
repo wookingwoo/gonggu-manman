@@ -35,6 +35,8 @@ public class RecomendationAdapter extends RecyclerView.Adapter<RecomendationAdap
     @Override
     public void onBindViewHolder(@NonNull RecomendationAdapter.CustomViewHolder holder, int position) {
 
+        String documentID = arrayList.get(position).getDocumentID();
+
         holder.iv_image.setImageResource(arrayList.get(position).getIv_image());
         holder.tv_title.setText(arrayList.get(position).getTitle());
         holder.tv_price.setText(arrayList.get(position).getPrice());
@@ -44,7 +46,6 @@ public class RecomendationAdapter extends RecyclerView.Adapter<RecomendationAdap
         holder.itemView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                String documentID = arrayList.get(position).getDocumentID();
                 Toast.makeText(view.getContext(), documentID, Toast.LENGTH_SHORT).show();
 
                 Log.i("Recomendation", "onClick: " + documentID);
