@@ -44,10 +44,10 @@ public class RecomendationAdapter extends RecyclerView.Adapter<RecomendationAdap
         holder.itemView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                String curName = holder.tv_title.getText().toString();
-                Toast.makeText(view.getContext(), curName, Toast.LENGTH_SHORT).show();
+                String documentID = arrayList.get(position).getDocumentID();
+                Toast.makeText(view.getContext(), documentID, Toast.LENGTH_SHORT).show();
 
-                Log.i("Recomendation", "onClick: " + curName);
+                Log.i("Recomendation", "onClick: " + documentID);
             }
         });
 

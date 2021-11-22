@@ -4,12 +4,15 @@ public class Recomendation {
     private String title;
     private String price;
     private int iv_image;
+    private String imgURL;
+    private String documentID;
 
-    public Recomendation(int iv_image, String title, String price) {
+    public Recomendation(int iv_image, String title, String price, String documentID) {
 
         this.iv_image = iv_image;
         this.title = title;
         this.price = price;
+        this.documentID = documentID;
 
     }
 
@@ -25,6 +28,12 @@ public class Recomendation {
         this.price = price;
     }
 
+
+    public void setDocumentID(String documentID) {
+        this.documentID = documentID;
+    }
+
+
     public int getIv_image() {
         return iv_image;
     }
@@ -35,5 +44,9 @@ public class Recomendation {
 
     public String getPrice() {
         return price;
+    }
+
+    public String getDocumentID() {
+        return documentID;
     }
 }

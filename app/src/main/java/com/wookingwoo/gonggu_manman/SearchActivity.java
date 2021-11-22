@@ -48,6 +48,9 @@ public class SearchActivity extends AppCompatActivity {
                                 String postsTitle = (String) document.get("title");
                                 Log.d("SearchActivity_getposts", "postsTitle->" + postsTitle);
 
+                                String documentID = (String) document.getId();
+                                Log.d("SearchActivity_getposts", "documentID->" + documentID);
+
                                 items.add(postsTitle);
                             }
 
