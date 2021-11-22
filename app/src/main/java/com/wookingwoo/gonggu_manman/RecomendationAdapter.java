@@ -11,6 +11,8 @@ import android.widget.Toast;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.bumptech.glide.Glide;
+
 import java.util.ArrayList;
 
 public class RecomendationAdapter extends RecyclerView.Adapter<RecomendationAdapter.CustomViewHolder> {
@@ -36,8 +38,13 @@ public class RecomendationAdapter extends RecyclerView.Adapter<RecomendationAdap
     public void onBindViewHolder(@NonNull RecomendationAdapter.CustomViewHolder holder, int position) {
 
         String documentID = arrayList.get(position).getDocumentID();
+        String imgURL = arrayList.get(position).getImgURL();
 
-        holder.iv_image.setImageResource(arrayList.get(position).getIv_image());
+
+        Glide.with(holder.iv_image.getContext()).load(imgURL).into(holder.iv_image);
+
+
+
         holder.tv_title.setText(arrayList.get(position).getTitle());
         holder.tv_price.setText(arrayList.get(position).getPrice());
 

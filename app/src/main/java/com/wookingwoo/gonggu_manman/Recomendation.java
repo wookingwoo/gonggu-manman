@@ -3,21 +3,20 @@ package com.wookingwoo.gonggu_manman;
 public class Recomendation {
     private String title;
     private String price;
-    private int iv_image;
     private String imgURL;
     private String documentID;
 
-    public Recomendation(int iv_image, String title, String price, String documentID) {
+    public Recomendation(String imgURL, String title, String price, String documentID) {
 
-        this.iv_image = iv_image;
+        this.imgURL = imgURL;
         this.title = title;
         this.price = price;
         this.documentID = documentID;
 
     }
 
-    public void setIv_image(int iv_image) {
-        this.iv_image = iv_image;
+    public void setImgURL(String iv_image) {
+        this.imgURL = imgURL;
     }
 
     public void setTitle(String title) {
@@ -34,8 +33,8 @@ public class Recomendation {
     }
 
 
-    public int getIv_image() {
-        return iv_image;
+    public String getImgURL() {
+        return imgURL;
     }
 
     public String getTitle() {

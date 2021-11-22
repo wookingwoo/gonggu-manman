@@ -138,10 +138,13 @@ public class HomeFragment extends Fragment {
                                 String postsTitle = (String) document.get("title");
                                 Log.d("get-posts-firestore", "postsTitle->" + postsTitle);
 
+                                String postsImage = (String) document.get("image");
+                                Log.d("get-posts-firestore", "postsImage->" + postsImage);
+
                                 String documentID = (String) document.getId();
                                 Log.d("get-posts-firestore", "documentID->" + documentID);
 
-                                Recomendation recommendationFS = new Recomendation(R.drawable.ic_baseline_image_24, postsTitle, "000원", documentID);
+                                Recomendation recommendationFS = new Recomendation(postsImage, postsTitle, "000원", documentID);
                                 recomendationArrayList.add(recommendationFS);
                             }
                             recomendationAdapter.notifyDataSetChanged();
@@ -149,10 +152,13 @@ public class HomeFragment extends Fragment {
                         } else {
                             Log.w("get-posts-firestore", "Error getting documents.", task.getException());
 
-                            Recomendation recommendation1 = new Recomendation(R.drawable.ic_baseline_image_24, "삼다수 2L 6병", "2600원", "mock-up");
-                            Recomendation recommendation2 = new Recomendation(R.drawable.ic_baseline_image_24, "사과 5알", "1900원", "mock-up");
-                            Recomendation recommendation3 = new Recomendation(R.drawable.ic_baseline_image_24, "화장지 5개", "1100원", "mock-up");
-                            Recomendation recommendation4 = new Recomendation(R.drawable.ic_baseline_image_24, "상추 10장", "360원", "mock-up");
+                            String emptyImage = "https://via.placeholder.com/300";
+
+
+                            Recomendation recommendation1 = new Recomendation(emptyImage, "삼다수 2L 6병", "2600원", "mock-up");
+                            Recomendation recommendation2 = new Recomendation(emptyImage, "사과 5알", "1900원", "mock-up");
+                            Recomendation recommendation3 = new Recomendation(emptyImage, "화장지 5개", "1100원", "mock-up");
+                            Recomendation recommendation4 = new Recomendation(emptyImage, "상추 10장", "360원", "mock-up");
 
                             recomendationArrayList.add(recommendation1);
                             recomendationArrayList.add(recommendation2);
