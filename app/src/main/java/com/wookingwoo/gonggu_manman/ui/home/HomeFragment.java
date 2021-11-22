@@ -134,8 +134,9 @@ public class HomeFragment extends Fragment {
                         if (task.isSuccessful()) {
                             for (QueryDocumentSnapshot document : task.getResult()) {
                                 Log.d("get-posts-firestore", document.getId() + " => " + document.getData());
+
                                 String postsTitle = (String) document.get("title");
-                                Log.d("get-posts-firestore", "2222->" + postsTitle);
+                                Log.d("get-posts-firestore", "postsTitle->" + postsTitle);
 
                                 Recomendation recommendationFS = new Recomendation(R.drawable.ic_baseline_image_24, postsTitle, "000원");
                                 recomendationArrayList.add(recommendationFS);

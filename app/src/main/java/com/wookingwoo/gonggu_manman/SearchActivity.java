@@ -1,26 +1,63 @@
 package com.wookingwoo.gonggu_manman;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
 import android.os.Bundle;
 
+import android.util.Log;
 import android.widget.SearchView;
 import android.widget.TextView;
 
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.Task;
+import com.google.firebase.firestore.FirebaseFirestore;
+import com.google.firebase.firestore.QueryDocumentSnapshot;
+import com.google.firebase.firestore.QuerySnapshot;
+
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Locale;
 
 public class SearchActivity extends AppCompatActivity {
 
-    private List<String> items = Arrays.asList("생수", "사과", "바나나", "화장지", "과일", "음료", "육류", "반찬", "의류", "생활용품", "육아용품");
+//    private List<String> items = Arrays.asList("생수", "사과", "바나나", "화장지", "과일", "음료", "육류", "반찬", "의류", "생활용품", "육아용품");
+
+    private List<String> items = new ArrayList();
 
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_search);
+
+
+        FirebaseFirestore db = FirebaseFirestore.getInstance();
+
+        db.collection("posts")
+                .get()
+                .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
+                    @Override
+                    public void onComplete(@NonNull Task<QuerySnapshot> task) {
+                        if (task.isSuccessful()) {
+                            for (QueryDocumentSnapshot document : task.getResult()) {
+                                Log.d("SearchActivity_getposts", document.getId() + " => " + document.getData());
+
+                                String postsTitle = (String) document.get("title");
+                                Log.d("SearchActivity_getposts", "postsTitle->" + postsTitle);
+
+                                items.add(postsTitle);
+                            }
+
+                        } else {
+                            Log.w("get-posts-firestore", "Error getting documents.", task.getException());
+
+
+                        }
+                    }
+                });
 
 
         Intent secondIntent = getIntent();
