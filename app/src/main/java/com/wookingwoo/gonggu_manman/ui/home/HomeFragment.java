@@ -2,6 +2,7 @@ package com.wookingwoo.gonggu_manman.ui.home;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -17,6 +18,14 @@ import androidx.lifecycle.ViewModelProvider;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.Task;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.firestore.FirebaseFirestore;
+import com.google.firebase.firestore.QueryDocumentSnapshot;
+import com.google.firebase.firestore.QuerySnapshot;
 import com.wookingwoo.gonggu_manman.Category;
 import com.wookingwoo.gonggu_manman.CategoryAdapter;
 import com.wookingwoo.gonggu_manman.PostActivity;
@@ -27,8 +36,12 @@ import com.wookingwoo.gonggu_manman.SearchActivity;
 import com.wookingwoo.gonggu_manman.databinding.FragmentHomeBinding;
 
 import java.util.ArrayList;
+import java.util.List;
 
 public class HomeFragment extends Fragment {
+
+    private FirebaseAuth mFirebaseAuth;
+    private String fb_uid;
 
 
     private ArrayList<Category> arrayList;
@@ -111,18 +124,43 @@ public class HomeFragment extends Fragment {
         recomendationRecyclerView.setLayoutManager(new LinearLayoutManager(getActivity(), RecyclerView.HORIZONTAL, false));    // 가로로 배치
 
 
-        Recomendation recommendation1 = new Recomendation(R.drawable.ic_baseline_image_24, "삼다수 2L 6병", "2600원");
-        Recomendation recommendation2 = new Recomendation(R.drawable.ic_baseline_image_24, "사과 5알", "1900원");
-        Recomendation recommendation3 = new Recomendation(R.drawable.ic_baseline_image_24, "화장지 5개", "1100원");
-        Recomendation recommendation4 = new Recomendation(R.drawable.ic_baseline_image_24, "상추 10장", "360원");
+        FirebaseFirestore db = FirebaseFirestore.getInstance();
 
-        recomendationArrayList.add(recommendation1);
-        recomendationArrayList.add(recommendation2);
-        recomendationArrayList.add(recommendation3);
-        recomendationArrayList.add(recommendation4);
+        db.collection("posts")
+                .get()
+                .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
+                    @Override
+                    public void onComplete(@NonNull Task<QuerySnapshot> task) {
+                        if (task.isSuccessful()) {
+                            for (QueryDocumentSnapshot document : task.getResult()) {
+                                Log.d("get-posts-firestore", document.getId() + " => " + document.getData());
+                                String postsTitle = (String) document.get("title");
+                                Log.d("get-posts-firestore", "2222->" + postsTitle);
+
+                                Recomendation recommendationFS = new Recomendation(R.drawable.ic_baseline_image_24, postsTitle, "000원");
+                                recomendationArrayList.add(recommendationFS);
+                            }
+                            recomendationAdapter.notifyDataSetChanged();
+
+                        } else {
+                            Log.w("get-posts-firestore", "Error getting documents.", task.getException());
+
+                            Recomendation recommendation1 = new Recomendation(R.drawable.ic_baseline_image_24, "삼다수 2L 6병", "2600원");
+                            Recomendation recommendation2 = new Recomendation(R.drawable.ic_baseline_image_24, "사과 5알", "1900원");
+                            Recomendation recommendation3 = new Recomendation(R.drawable.ic_baseline_image_24, "화장지 5개", "1100원");
+                            Recomendation recommendation4 = new Recomendation(R.drawable.ic_baseline_image_24, "상추 10장", "360원");
+
+                            recomendationArrayList.add(recommendation1);
+                            recomendationArrayList.add(recommendation2);
+                            recomendationArrayList.add(recommendation3);
+                            recomendationArrayList.add(recommendation4);
+
+                            recomendationAdapter.notifyDataSetChanged();
 
 
-        recomendationAdapter.notifyDataSetChanged();
+                        }
+                    }
+                });
 
 
         return v;
