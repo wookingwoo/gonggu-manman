@@ -74,7 +74,7 @@ public class LoginActivity extends AppCompatActivity {
                             mDialog.dismiss();
                             Toast.makeText(LoginActivity.this, "로그인 성공!", Toast.LENGTH_SHORT).show();
                             FirebaseUser user = firebaseAuth.getCurrentUser();
-                            startActivity(new Intent(getApplicationContext(), BottomNavigationActivity.class));
+                            startActivity(new Intent(getApplicationContext(), FeatureAttend.class));
                         } else {
                             mDialog.dismiss();
                             Toast.makeText(LoginActivity.this, "로그인 실패" + task.getException().getMessage(), Toast.LENGTH_LONG).show();
