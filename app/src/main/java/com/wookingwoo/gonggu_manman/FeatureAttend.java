@@ -2,6 +2,8 @@ package com.wookingwoo.gonggu_manman;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+
+import android.content.Intent;
 import android.os.Bundle;
 import android.animation.Animator;
 import android.util.Log;
@@ -12,15 +14,20 @@ import android.view.animation.ScaleAnimation;
 import android.widget.Button;
 import android.widget.CompoundButton;
 import android.widget.ImageView;
+import android.widget.TextView;
 
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.QueryDocumentSnapshot;
 import com.google.firebase.firestore.QuerySnapshot;
 
 import com.bumptech.glide.Glide;
+import com.google.firebase.firestore.WriteBatch;
+
+import org.w3c.dom.Document;
 
 public class FeatureAttend extends AppCompatActivity {
     ScaleAnimation scaleAnimation;
@@ -28,7 +35,12 @@ public class FeatureAttend extends AppCompatActivity {
     CompoundButton button_favorite;
 
     FirebaseAuth firebaseAuth;
+    FirebaseFirestore db = FirebaseFirestore.getInstance();
+
     String documentID="f4dSOwWGa7EQYSB4GwQS";
+    boolean check;
+    String postsJoin;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -38,6 +50,12 @@ public class FeatureAttend extends AppCompatActivity {
         scaleAnimation = new ScaleAnimation(0.7f, 1.0f, 0.7f, 1.0f, Animation.RELATIVE_TO_SELF, 0.7f, Animation.RELATIVE_TO_SELF, 0.7f);
 
         ImageView load=(ImageView)findViewById(R.id.imageView2);
+        TextView title = (TextView)findViewById(R.id.Title);
+        TextView context = (TextView)findViewById(R.id.Context);
+        TextView recruit = (TextView)findViewById(R.id.Recriut);
+        TextView join = (TextView)findViewById(R.id.Join);
+        Button join_btn = (Button)findViewById(R.id.button2);
+
 
         scaleAnimation.setDuration(500);
         bounceInterpolator = new BounceInterpolator();
@@ -52,7 +70,6 @@ public class FeatureAttend extends AppCompatActivity {
             }
         });
 
-        FirebaseFirestore db = FirebaseFirestore.getInstance();
         db.collection("posts") .get()
                 .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
                     @Override
@@ -72,13 +89,19 @@ public class FeatureAttend extends AppCompatActivity {
                                 String postsImage = (String) document.get("image");
                                 String postsRecruit = (String) document.get("recruit");
                                 String postsWriter = (String) document.get("writer");
+                                String postsDetail = (String) document.get("detail");
                                 String postDocumentID = (String) document.getId();
 
                                 if(postDocumentID.equals(documentID)){
                                     Log.d("get-posts-firestore", "postsTitle->" + postsTitle);
                                     Log.d("get-posts-firestore", "postsImage->" + postsImage);
                                     Log.d("get-posts-firestore", "documentID->" + documentID);
+
                                     Glide.with(FeatureAttend.this).load(postsImage).into(load);
+                                    join.setText(postsJoin);
+                                    recruit.setText(postsRecruit);
+                                    title.setText(postsTitle);
+                                    context.setText(postsDetail);
                                     break;
                                 }
 
@@ -86,5 +109,27 @@ public class FeatureAttend extends AppCompatActivity {
                     }
                 });
 
+        join_btn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                WriteBatch batch = db.batch();
+                DocumentReference updateJoin = db.collection("posts").document("join");
+                batch.update(updateJoin, "join", postsJoin+1);
+
+                if(!check){
+                    int trans = Integer.parseInt(postsJoin) + 1;
+                    String joinNum = Integer.toString(trans);
+                    join.setText(joinNum);
+                    check = true;
+                }
+
+                else{
+                    int trans = Integer.parseInt(postsJoin) - 1;
+                    String joinNum = Integer.toString(trans);
+                    join.setText(joinNum);
+                    check = true;
+                }
+            }
+        });
     }
 }
