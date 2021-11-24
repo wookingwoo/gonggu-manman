@@ -110,10 +110,10 @@ public class PostActivity extends AppCompatActivity {
     private void uploadData() {
         final String titleStr = title.getText().toString();
         final String cateStr = category.getText().toString();
-        final String recruitStr = recruit.getText().toString().trim();
+        final int recruitStr = Integer.parseInt(recruit.getText().toString().trim());
         final String detailStr = detail.getText().toString();
         final String imgStr = imgUrl.getText().toString();
-        final String joinStr = "1";
+        final int joinStr = 1;
         final String writer = userUid;
 
         CreateInfo createInfo = new CreateInfo(titleStr, cateStr, joinStr, recruitStr, detailStr, imgStr, writer);

@@ -2,14 +2,14 @@ package com.wookingwoo.gonggu_manman;
 
 public class CreateInfo {
     private String title;
-    private String join;
-    private String recruit;
+    private int join;
+    private int recruit;
     private String detail;
     private String category;
     private String image;
     private String writer;
 
-    public CreateInfo(String title, String category, String join, String recruit, String detail, String image, String writer) {
+    public CreateInfo(String title, String category, int join, int recruit, String detail, String image, String writer) {
         this.title = title;
         this.category = category;
         this.join = join;
@@ -27,19 +27,19 @@ public class CreateInfo {
         this.title = title;
     }
 
-    public String getJoin() {
+    public int getJoin() {
         return join;
     }
 
-    public void setJoin(String join) {
+    public void setJoin(int join) {
         this.join = join;
     }
 
-    public String getRecruit() {
+    public int getRecruit() {
         return recruit;
     }
 
-    public void setRecruit(String recruit) {
+    public void setRecruit(int recruit) {
         this.recruit = recruit;
     }
 
