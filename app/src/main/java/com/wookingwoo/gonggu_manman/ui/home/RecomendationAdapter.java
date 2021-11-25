@@ -63,10 +63,10 @@ public class RecomendationAdapter extends RecyclerView.Adapter<RecomendationAdap
 
                 Log.i("Recomendation", "onClick: " + documentID);
 
-//                // FeatureAttend로 인텐트 전환
-//                Intent detailIntent = new Intent(view.getContext(), FeatureAttend.class);
-//                detailIntent.putExtra("documentID", documentID);
-//                view.getContext().startActivity(detailIntent);
+                // FeatureAttend로 인텐트 전환
+                Intent detailIntent = new Intent(view.getContext(), FeatureAttend.class);
+                detailIntent.putExtra("documentID", documentID);
+                view.getContext().startActivity(detailIntent);
             }
         });
 
