@@ -1,5 +1,7 @@
-package com.wookingwoo.gonggu_manman;
+package com.wookingwoo.gonggu_manman.ui.home;
 
+import android.content.Context;
+import android.content.Intent;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -11,15 +13,22 @@ import android.widget.Toast;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.bumptech.glide.Glide;
+import com.wookingwoo.gonggu_manman.FeatureAttend;
+import com.wookingwoo.gonggu_manman.R;
+import com.wookingwoo.gonggu_manman.searchTitle.SearchActivity;
+
 import java.util.ArrayList;
 
 public class RecomendationAdapter extends RecyclerView.Adapter<RecomendationAdapter.CustomViewHolder> {
+
 
     private ArrayList<Recomendation> arrayList;
 
     public RecomendationAdapter(ArrayList<Recomendation> arrayList) {
         this.arrayList = arrayList;
     }
+
 
     @NonNull
     @Override
@@ -35,7 +44,14 @@ public class RecomendationAdapter extends RecyclerView.Adapter<RecomendationAdap
     @Override
     public void onBindViewHolder(@NonNull RecomendationAdapter.CustomViewHolder holder, int position) {
 
-        holder.iv_image.setImageResource(arrayList.get(position).getIv_image());
+        String title = arrayList.get(position).getTitle();
+        String documentID = arrayList.get(position).getDocumentID();
+        String imgURL = arrayList.get(position).getImgURL();
+
+
+        Glide.with(holder.iv_image.getContext()).load(imgURL).into(holder.iv_image);
+
+
         holder.tv_title.setText(arrayList.get(position).getTitle());
         holder.tv_price.setText(arrayList.get(position).getPrice());
 
@@ -44,26 +60,30 @@ public class RecomendationAdapter extends RecyclerView.Adapter<RecomendationAdap
         holder.itemView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                String curName = holder.tv_title.getText().toString();
-                Toast.makeText(view.getContext(), curName, Toast.LENGTH_SHORT).show();
+//                Toast.makeText(view.getContext(), documentID, Toast.LENGTH_SHORT).show();
+                Toast.makeText(view.getContext(), "공구장터로 이동합니다: " + title, Toast.LENGTH_SHORT).show();
+                Log.i("Recomendation", "onClick: " + documentID);
 
-                Log.i("Recomendation", "onClick: " + curName);
+                // FeatureAttend로 인텐트 전환
+                Intent detailIntent = new Intent(view.getContext(), FeatureAttend.class);
+                detailIntent.putExtra("documentID", documentID);
+                view.getContext().startActivity(detailIntent);
             }
         });
 
 
-        holder.itemView.setOnLongClickListener(new View.OnLongClickListener() {
-
-            @Override
-            public boolean onLongClick(View view) {
-                String curName = holder.tv_title.getText().toString();
-
-                Toast.makeText(view.getContext(), "롱클릭", Toast.LENGTH_SHORT).show();
-                Log.i("Recomendation", "LongClick: " + curName);
-
-                return true;
-            }
-        });
+//        holder.itemView.setOnLongClickListener(new View.OnLongClickListener() {
+//
+//            @Override
+//            public boolean onLongClick(View view) {
+//                String curName = holder.tv_title.getText().toString();
+//
+//                Toast.makeText(view.getContext(), "롱클릭", Toast.LENGTH_SHORT).show();
+//                Log.i("Recomendation", "LongClick: " + curName);
+//
+//                return true;
+//            }
+//        });
 
     }
 

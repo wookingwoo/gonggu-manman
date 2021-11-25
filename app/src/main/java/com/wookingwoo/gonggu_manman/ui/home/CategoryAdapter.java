@@ -1,4 +1,4 @@
-package com.wookingwoo.gonggu_manman;
+package com.wookingwoo.gonggu_manman.ui.home;
 
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -10,6 +10,9 @@ import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
+
+import com.bumptech.glide.Glide;
+import com.wookingwoo.gonggu_manman.R;
 
 import java.util.ArrayList;
 
@@ -35,8 +38,12 @@ public class CategoryAdapter extends RecyclerView.Adapter<CategoryAdapter.Custom
     @Override
     public void onBindViewHolder(@NonNull CategoryAdapter.CustomViewHolder holder, int position) {
 
+
+        String imgURL = arrayList.get(position).getImgURL();
+        Glide.with(holder.iv_category.getContext()).load(imgURL).into(holder.iv_category);
+
+
         holder.tv_name.setText(arrayList.get(position).getName());
-        holder.iv_category.setImageResource(arrayList.get(position).getIv_category());
 
         holder.itemView.setTag(position);
 
