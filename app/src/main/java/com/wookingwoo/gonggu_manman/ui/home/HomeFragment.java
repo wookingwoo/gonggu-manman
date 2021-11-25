@@ -138,6 +138,10 @@ public class HomeFragment extends Fragment {
                                 String postsTitle = (String) document.get("title");
                                 Log.d("get-posts-firestore", "postsTitle->" + postsTitle);
 
+                                String postsPrice = (String) document.get("price");
+                                Log.d("get-posts-firestore", "postsPrice->" + postsPrice);
+
+
                                 String postsImage = (String) document.get("image");
                                 Log.d("get-posts-firestore", "postsImage->" + postsImage);
 
@@ -146,7 +150,7 @@ public class HomeFragment extends Fragment {
 
 
                                 if ((postsTitle != null) && (!postsTitle.equals("")) && (postsImage != null) && (!postsImage.equals(""))) {
-                                    Recomendation recommendationFS = new Recomendation(postsImage, postsTitle, "000원", documentID);
+                                    Recomendation recommendationFS = new Recomendation(postsImage, postsTitle, postsPrice + "원", documentID);
                                     recomendationArrayList.add(recommendationFS);
                                 }
                             }
