@@ -108,9 +108,9 @@ public class HomeFragment extends Fragment {
                                 Log.d("get-categories-fs", "categoryTitle->" + categoryTitle);
 
 
-                                if ( (!categoryTitle.equals("")) && (postsImage != null) && (!postsImage.equals(""))) {
+                                if ((!categoryTitle.equals("")) && (postsImage != null) && (!postsImage.equals(""))) {
 
-                                    Category categories = new Category(R.drawable.daily_necessities, categoryTitle);
+                                    Category categories = new Category(postsImage, categoryTitle);
                                     arrayList.add(categories);
                                 }
                             }
@@ -122,10 +122,10 @@ public class HomeFragment extends Fragment {
                             String emptyImage = "https://via.placeholder.com/300";
 
 
-                            Category category1 = new Category(R.drawable.fruits, "Fruits");
-                            Category category2 = new Category(R.drawable.vegetables, "Veggie");
-                            Category category3 = new Category(R.drawable.meat, "Meat");
-                            Category category4 = new Category(R.drawable.daily_necessities, "daily necessities");
+                            Category category1 = new Category(emptyImage, "Fruits");
+                            Category category2 = new Category(emptyImage, "Veggie");
+                            Category category3 = new Category(emptyImage, "Meat");
+                            Category category4 = new Category(emptyImage, "daily necessities");
 
                             arrayList.add(category1);
                             arrayList.add(category2);
@@ -140,8 +140,6 @@ public class HomeFragment extends Fragment {
                 });
 
 
-
-
 // Recomendation View
         recomendationRecyclerView = (RecyclerView) v.findViewById(R.id.recommendation_view);
         recomendationLinearLayoutManager = new LinearLayoutManager(getActivity());
@@ -152,7 +150,6 @@ public class HomeFragment extends Fragment {
         recomendationAdapter = new RecomendationAdapter(recomendationArrayList);
         recomendationRecyclerView.setAdapter(recomendationAdapter);
         recomendationRecyclerView.setLayoutManager(new LinearLayoutManager(getActivity(), RecyclerView.HORIZONTAL, false));    // 가로로 배치
-
 
 
         db.collection("posts")

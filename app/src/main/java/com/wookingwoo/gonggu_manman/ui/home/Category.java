@@ -4,26 +4,27 @@ import android.graphics.drawable.Drawable;
 
 public class Category {
     private String name;
-    private int iv_category;
+    private String imgURL;
 
-    public Category(int iv_category, String name) {
 
-        this.iv_category = iv_category;
+    public Category(String imgURL, String name) {
+        this.imgURL = imgURL;
         this.name = name;
-
     }
 
-    public void setIv_category(int iv_category) {
-        this.iv_category = iv_category;
+    public void setImgURL(String iv_image) {
+        this.imgURL = imgURL;
     }
+
 
     public void setName(String name) {
         this.name = name;
     }
 
-    public int getIv_category() {
-        return iv_category;
+    public String getImgURL() {
+        return imgURL;
     }
+
 
     public String getName() {
         return name;
