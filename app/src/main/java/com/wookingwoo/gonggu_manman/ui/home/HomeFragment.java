@@ -88,17 +88,59 @@ public class HomeFragment extends Fragment {
         recyclerView.setLayoutManager(new LinearLayoutManager(getActivity(), RecyclerView.HORIZONTAL, false));    // 가로로 배치
 
 
-        Category category1 = new Category(R.drawable.fruits, "Fruits");
-        Category category2 = new Category(R.drawable.vegetables, "Veggie");
-        Category category3 = new Category(R.drawable.meat, "Meat");
-        Category category4 = new Category(R.drawable.daily_necessities, "daily necessities");
+        FirebaseFirestore db = FirebaseFirestore.getInstance();
 
-        arrayList.add(category1);
-        arrayList.add(category2);
-        arrayList.add(category3);
-        arrayList.add(category4);
 
-        categoryAdapter.notifyDataSetChanged();
+        db.collection("categories")
+                .get()
+                .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
+                    @Override
+                    public void onComplete(@NonNull Task<QuerySnapshot> task) {
+                        if (task.isSuccessful()) {
+                            for (QueryDocumentSnapshot document : task.getResult()) {
+                                Log.d("get-categories-fs", document.getId() + " => " + document.getData());
+
+
+                                String postsImage = (String) document.get("image");
+                                Log.d("get-categories-fs", "postsImage->" + postsImage);
+
+                                String categoryTitle = (String) document.getId();
+                                Log.d("get-categories-fs", "categoryTitle->" + categoryTitle);
+
+
+                                if ( (!categoryTitle.equals("")) && (postsImage != null) && (!postsImage.equals(""))) {
+
+                                    Category categories = new Category(R.drawable.daily_necessities, categoryTitle);
+                                    arrayList.add(categories);
+                                }
+                            }
+                            categoryAdapter.notifyDataSetChanged();
+
+                        } else {
+                            Log.w("get-categories-fs", "Error getting documents.", task.getException());
+
+                            String emptyImage = "https://via.placeholder.com/300";
+
+
+                            Category category1 = new Category(R.drawable.fruits, "Fruits");
+                            Category category2 = new Category(R.drawable.vegetables, "Veggie");
+                            Category category3 = new Category(R.drawable.meat, "Meat");
+                            Category category4 = new Category(R.drawable.daily_necessities, "daily necessities");
+
+                            arrayList.add(category1);
+                            arrayList.add(category2);
+                            arrayList.add(category3);
+                            arrayList.add(category4);
+
+                            categoryAdapter.notifyDataSetChanged();
+
+
+                        }
+                    }
+                });
+
+
+
 
 // Recomendation View
         recomendationRecyclerView = (RecyclerView) v.findViewById(R.id.recommendation_view);
@@ -112,7 +154,6 @@ public class HomeFragment extends Fragment {
         recomendationRecyclerView.setLayoutManager(new LinearLayoutManager(getActivity(), RecyclerView.HORIZONTAL, false));    // 가로로 배치
 
 
-        FirebaseFirestore db = FirebaseFirestore.getInstance();
 
         db.collection("posts")
                 .get()
