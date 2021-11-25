@@ -33,7 +33,7 @@
 <!--            </intent-filter>-->
 
         <activity
-            android:name=".SearchActivity"
+            android:name=".searchTitle.SearchActivity"
             android:exported="false" />
         <activity android:name=".FeatureAttend"/>
 

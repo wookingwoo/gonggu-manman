@@ -1,4 +1,4 @@
-package com.wookingwoo.gonggu_manman;
+package com.wookingwoo.gonggu_manman.ui.home;
 
 public class Recomendation {
     private String title;

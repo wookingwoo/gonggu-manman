@@ -8,35 +8,23 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.ImageButton;
-import android.widget.TextView;
 
 import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
-import androidx.lifecycle.Observer;
-import androidx.lifecycle.ViewModelProvider;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
-import com.google.firebase.auth.FirebaseUser;
-import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.QueryDocumentSnapshot;
 import com.google.firebase.firestore.QuerySnapshot;
-import com.wookingwoo.gonggu_manman.Category;
-import com.wookingwoo.gonggu_manman.CategoryAdapter;
-import com.wookingwoo.gonggu_manman.PostActivity;
 import com.wookingwoo.gonggu_manman.R;
-import com.wookingwoo.gonggu_manman.Recomendation;
-import com.wookingwoo.gonggu_manman.RecomendationAdapter;
-import com.wookingwoo.gonggu_manman.SearchActivity;
+import com.wookingwoo.gonggu_manman.searchTitle.SearchActivity;
 import com.wookingwoo.gonggu_manman.databinding.FragmentHomeBinding;
 
 import java.util.ArrayList;
-import java.util.List;
 
 public class HomeFragment extends Fragment {
 
