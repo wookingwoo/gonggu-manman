@@ -26,6 +26,7 @@ import com.google.firebase.firestore.QuerySnapshot;
 
 import com.bumptech.glide.Glide;
 import com.google.firebase.firestore.WriteBatch;
+import com.wookingwoo.gonggu_manman.searchTitle.SearchActivity;
 
 import org.w3c.dom.Document;
 
@@ -37,7 +38,6 @@ public class FeatureAttend extends AppCompatActivity {
     FirebaseAuth firebaseAuth;
     FirebaseFirestore db = FirebaseFirestore.getInstance();
 
-    String documentID="f4dSOwWGa7EQYSB4GwQS";
     boolean check;
     String postsJoin;
 
@@ -49,12 +49,12 @@ public class FeatureAttend extends AppCompatActivity {
         firebaseAuth = FirebaseAuth.getInstance();
         scaleAnimation = new ScaleAnimation(0.7f, 1.0f, 0.7f, 1.0f, Animation.RELATIVE_TO_SELF, 0.7f, Animation.RELATIVE_TO_SELF, 0.7f);
 
-        ImageView load=(ImageView)findViewById(R.id.imageView2);
-        TextView title = (TextView)findViewById(R.id.Title);
-        TextView context = (TextView)findViewById(R.id.Context);
-        TextView recruit = (TextView)findViewById(R.id.Recriut);
-        TextView join = (TextView)findViewById(R.id.Join);
-        Button join_btn = (Button)findViewById(R.id.button2);
+        ImageView load = (ImageView) findViewById(R.id.imageView2);
+        TextView title = (TextView) findViewById(R.id.Title);
+        TextView context = (TextView) findViewById(R.id.Context);
+        TextView recruit = (TextView) findViewById(R.id.Recriut);
+        TextView join = (TextView) findViewById(R.id.Join);
+        Button join_btn = (Button) findViewById(R.id.button2);
 
 
         scaleAnimation.setDuration(500);
@@ -70,7 +70,13 @@ public class FeatureAttend extends AppCompatActivity {
             }
         });
 
-        db.collection("posts") .get()
+
+        // Intent 데이터 수신 (홈화면)
+        Intent homeIntent = getIntent();
+        String documentID = homeIntent.getExtras().getString("documentID"); /*String형*/
+
+
+        db.collection("posts").get()
                 .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
                     @Override
                     public void onComplete(@NonNull Task<QuerySnapshot> task) {
@@ -83,29 +89,29 @@ public class FeatureAttend extends AppCompatActivity {
 //                            Log.w("get-posts-firestore", "Error getting documents.", task.getException());
 //                        }
 
-                            for (QueryDocumentSnapshot document : task.getResult()) {
-                                String postsTitle = (String) document.get("title");
-                                String postsJoin = (String) document.get("join");
-                                String postsImage = (String) document.get("image");
-                                String postsRecruit = (String) document.get("recruit");
-                                String postsWriter = (String) document.get("writer");
-                                String postsDetail = (String) document.get("detail");
-                                String postDocumentID = (String) document.getId();
+                        for (QueryDocumentSnapshot document : task.getResult()) {
+                            String postsTitle = (String) document.get("title");
+                            String postsJoin = (String) document.get("join");
+                            String postsImage = (String) document.get("image");
+                            String postsRecruit = (String) document.get("recruit");
+                            String postsWriter = (String) document.get("writer");
+                            String postsDetail = (String) document.get("detail");
+                            String postDocumentID = (String) document.getId();
 
-                                if(postDocumentID.equals(documentID)){
-                                    Log.d("get-posts-firestore", "postsTitle->" + postsTitle);
-                                    Log.d("get-posts-firestore", "postsImage->" + postsImage);
-                                    Log.d("get-posts-firestore", "documentID->" + documentID);
+                            if (postDocumentID.equals(documentID)) {
+                                Log.d("get-posts-firestore", "postsTitle->" + postsTitle);
+                                Log.d("get-posts-firestore", "postsImage->" + postsImage);
+                                Log.d("get-posts-firestore", "documentID->" + documentID);
 
-                                    Glide.with(FeatureAttend.this).load(postsImage).into(load);
-                                    join.setText(postsJoin);
-                                    recruit.setText(postsRecruit);
-                                    title.setText(postsTitle);
-                                    context.setText(postsDetail);
-                                    break;
-                                }
-
+                                Glide.with(FeatureAttend.this).load(postsImage).into(load);
+                                join.setText(postsJoin);
+                                recruit.setText(postsRecruit);
+                                title.setText(postsTitle);
+                                context.setText(postsDetail);
+                                break;
                             }
+
+                        }
                     }
                 });
 
@@ -114,16 +120,14 @@ public class FeatureAttend extends AppCompatActivity {
             public void onClick(View view) {
                 WriteBatch batch = db.batch();
                 DocumentReference updateJoin = db.collection("posts").document("join");
-                batch.update(updateJoin, "join", postsJoin+1);
+                batch.update(updateJoin, "join", postsJoin + 1);
 
-                if(!check){
+                if (!check) {
                     int trans = Integer.parseInt(postsJoin) + 1;
                     String joinNum = Integer.toString(trans);
                     join.setText(joinNum);
                     check = true;
-                }
-
-                else{
+                } else {
                     int trans = Integer.parseInt(postsJoin) - 1;
                     String joinNum = Integer.toString(trans);
                     join.setText(joinNum);
