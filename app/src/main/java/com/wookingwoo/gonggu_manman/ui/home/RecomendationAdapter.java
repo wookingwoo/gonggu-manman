@@ -44,6 +44,7 @@ public class RecomendationAdapter extends RecyclerView.Adapter<RecomendationAdap
     @Override
     public void onBindViewHolder(@NonNull RecomendationAdapter.CustomViewHolder holder, int position) {
 
+        String title = arrayList.get(position).getTitle();
         String documentID = arrayList.get(position).getDocumentID();
         String imgURL = arrayList.get(position).getImgURL();
 
@@ -59,8 +60,8 @@ public class RecomendationAdapter extends RecyclerView.Adapter<RecomendationAdap
         holder.itemView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Toast.makeText(view.getContext(), documentID, Toast.LENGTH_SHORT).show();
-
+//                Toast.makeText(view.getContext(), documentID, Toast.LENGTH_SHORT).show();
+                Toast.makeText(view.getContext(), "공구장터로 이동합니다: " + title, Toast.LENGTH_SHORT).show();
                 Log.i("Recomendation", "onClick: " + documentID);
 
                 // FeatureAttend로 인텐트 전환
