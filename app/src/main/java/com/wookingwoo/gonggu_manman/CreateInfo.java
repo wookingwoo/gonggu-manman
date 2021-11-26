@@ -2,18 +2,20 @@ package com.wookingwoo.gonggu_manman;
 
 public class CreateInfo {
     private String title;
-    private int join;
-    private int recruit;
+    private String join;
+    private String recruit;
+    private String price;
     private String detail;
     private String category;
     private String image;
     private String writer;
 
-    public CreateInfo(String title, String category, int join, int recruit, String detail, String image, String writer) {
+    public CreateInfo(String title, String category, String join, String recruit, String price, String detail, String image, String writer) {
         this.title = title;
         this.category = category;
         this.join = join;
         this.recruit = recruit;
+        this.price = price;
         this.detail = detail;
         this.image = image;
         this.writer = writer;
@@ -27,19 +29,19 @@ public class CreateInfo {
         this.title = title;
     }
 
-    public int getJoin() {
+    public String getJoin() {
         return join;
     }
 
-    public void setJoin(int join) {
+    public void setJoin(String join) {
         this.join = join;
     }
 
-    public int getRecruit() {
+    public String getRecruit() {
         return recruit;
     }
 
-    public void setRecruit(int recruit) {
+    public void setRecruit(String recruit) {
         this.recruit = recruit;
     }
 
@@ -74,5 +76,13 @@ public class CreateInfo {
 
     public void setImage(String image) {
         this.image = image;
+    }
+
+    public String getPrice() {
+        return price;
+    }
+
+    public void setPrice(String price) {
+        this.price = price;
     }
 }
