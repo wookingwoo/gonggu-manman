@@ -8,35 +8,23 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.ImageButton;
-import android.widget.TextView;
 
 import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
-import androidx.lifecycle.Observer;
-import androidx.lifecycle.ViewModelProvider;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
-import com.google.firebase.auth.FirebaseUser;
-import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.QueryDocumentSnapshot;
 import com.google.firebase.firestore.QuerySnapshot;
-import com.wookingwoo.gonggu_manman.Category;
-import com.wookingwoo.gonggu_manman.CategoryAdapter;
-import com.wookingwoo.gonggu_manman.PostActivity;
 import com.wookingwoo.gonggu_manman.R;
-import com.wookingwoo.gonggu_manman.Recomendation;
-import com.wookingwoo.gonggu_manman.RecomendationAdapter;
-import com.wookingwoo.gonggu_manman.SearchActivity;
+import com.wookingwoo.gonggu_manman.searchTitle.SearchActivity;
 import com.wookingwoo.gonggu_manman.databinding.FragmentHomeBinding;
 
 import java.util.ArrayList;
-import java.util.List;
 
 public class HomeFragment extends Fragment {
 
@@ -100,17 +88,57 @@ public class HomeFragment extends Fragment {
         recyclerView.setLayoutManager(new LinearLayoutManager(getActivity(), RecyclerView.HORIZONTAL, false));    // 가로로 배치
 
 
-        Category category1 = new Category(R.drawable.fruits, "Fruits");
-        Category category2 = new Category(R.drawable.vegetables, "Veggie");
-        Category category3 = new Category(R.drawable.meat, "Meat");
-        Category category4 = new Category(R.drawable.daily_necessities, "daily necessities");
+        FirebaseFirestore db = FirebaseFirestore.getInstance();
 
-        arrayList.add(category1);
-        arrayList.add(category2);
-        arrayList.add(category3);
-        arrayList.add(category4);
 
-        categoryAdapter.notifyDataSetChanged();
+        db.collection("categories")
+                .get()
+                .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
+                    @Override
+                    public void onComplete(@NonNull Task<QuerySnapshot> task) {
+                        if (task.isSuccessful()) {
+                            for (QueryDocumentSnapshot document : task.getResult()) {
+                                Log.d("get-categories-fs", document.getId() + " => " + document.getData());
+
+
+                                String postsImage = (String) document.get("image");
+                                Log.d("get-categories-fs", "postsImage->" + postsImage);
+
+                                String categoryTitle = (String) document.getId();
+                                Log.d("get-categories-fs", "categoryTitle->" + categoryTitle);
+
+
+                                if ((!categoryTitle.equals("")) && (postsImage != null) && (!postsImage.equals(""))) {
+
+                                    Category categories = new Category(postsImage, categoryTitle);
+                                    arrayList.add(categories);
+                                }
+                            }
+                            categoryAdapter.notifyDataSetChanged();
+
+                        } else {
+                            Log.w("get-categories-fs", "Error getting documents.", task.getException());
+
+                            String emptyImage = "https://via.placeholder.com/300";
+
+
+                            Category category1 = new Category(emptyImage, "Fruits");
+                            Category category2 = new Category(emptyImage, "Veggie");
+                            Category category3 = new Category(emptyImage, "Meat");
+                            Category category4 = new Category(emptyImage, "daily necessities");
+
+                            arrayList.add(category1);
+                            arrayList.add(category2);
+                            arrayList.add(category3);
+                            arrayList.add(category4);
+
+                            categoryAdapter.notifyDataSetChanged();
+
+
+                        }
+                    }
+                });
+
 
 // Recomendation View
         recomendationRecyclerView = (RecyclerView) v.findViewById(R.id.recommendation_view);
@@ -124,8 +152,6 @@ public class HomeFragment extends Fragment {
         recomendationRecyclerView.setLayoutManager(new LinearLayoutManager(getActivity(), RecyclerView.HORIZONTAL, false));    // 가로로 배치
 
 
-        FirebaseFirestore db = FirebaseFirestore.getInstance();
-
         db.collection("posts")
                 .get()
                 .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
@@ -138,6 +164,10 @@ public class HomeFragment extends Fragment {
                                 String postsTitle = (String) document.get("title");
                                 Log.d("get-posts-firestore", "postsTitle->" + postsTitle);
 
+                                String postsPrice = (String) document.get("price");
+                                Log.d("get-posts-firestore", "postsPrice->" + postsPrice);
+
+
                                 String postsImage = (String) document.get("image");
                                 Log.d("get-posts-firestore", "postsImage->" + postsImage);
 
@@ -146,7 +176,7 @@ public class HomeFragment extends Fragment {
 
 
                                 if ((postsTitle != null) && (!postsTitle.equals("")) && (postsImage != null) && (!postsImage.equals(""))) {
-                                    Recomendation recommendationFS = new Recomendation(postsImage, postsTitle, "000원", documentID);
+                                    Recomendation recommendationFS = new Recomendation(postsImage, postsTitle, postsPrice + "원", documentID);
                                     recomendationArrayList.add(recommendationFS);
                                 }
                             }
