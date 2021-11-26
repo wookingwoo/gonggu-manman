@@ -5,7 +5,6 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.animation.Animator;
 import android.util.Log;
 import android.view.View;
 import android.view.animation.Animation;
@@ -17,6 +16,8 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.OnFailureListener;
+import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.firestore.DocumentReference;
@@ -26,8 +27,6 @@ import com.google.firebase.firestore.QuerySnapshot;
 
 import com.bumptech.glide.Glide;
 import com.google.firebase.firestore.WriteBatch;
-
-import org.w3c.dom.Document;
 
 public class FeatureAttend extends AppCompatActivity {
     ScaleAnimation scaleAnimation;
@@ -49,12 +48,12 @@ public class FeatureAttend extends AppCompatActivity {
         firebaseAuth = FirebaseAuth.getInstance();
         scaleAnimation = new ScaleAnimation(0.7f, 1.0f, 0.7f, 1.0f, Animation.RELATIVE_TO_SELF, 0.7f, Animation.RELATIVE_TO_SELF, 0.7f);
 
-        ImageView load=(ImageView)findViewById(R.id.imageView2);
-        TextView title = (TextView)findViewById(R.id.Title);
-        TextView context = (TextView)findViewById(R.id.Context);
-        TextView recruit = (TextView)findViewById(R.id.Recriut);
-        TextView join = (TextView)findViewById(R.id.Join);
-        Button join_btn = (Button)findViewById(R.id.button2);
+        ImageView load = (ImageView) findViewById(R.id.imageView2);
+        TextView title = (TextView) findViewById(R.id.Title);
+        TextView context = (TextView) findViewById(R.id.Context);
+        TextView recruit = (TextView) findViewById(R.id.Recriut);
+        TextView join = (TextView) findViewById(R.id.Join);
+        Button join_btn = (Button) findViewById(R.id.button2);
 
         Intent intent = getIntent(); /*데이터 수신*/
         documentID = intent.getExtras().getString("documentID");
@@ -73,7 +72,7 @@ public class FeatureAttend extends AppCompatActivity {
             }
         });
 
-        db.collection("posts") .get()
+        db.collection("posts").get()
                 .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
                     @Override
                     public void onComplete(@NonNull Task<QuerySnapshot> task) {
@@ -89,9 +88,9 @@ public class FeatureAttend extends AppCompatActivity {
                         for (QueryDocumentSnapshot document : task.getResult()) {
                             String postDocumentID = (String) document.getId();
 
-                            if(postDocumentID.equals(documentID)){
+                            if (postDocumentID.equals(documentID)) {
                                 String postsTitle = (String) document.get("title");
-                                String postsJoin = (String) document.get("join");
+                                postsJoin = (String) document.get("join");
                                 String postsImage = (String) document.get("image");
                                 String postsRecruit = (String) document.get("recruit");
                                 String postsWriter = (String) document.get("writer");
@@ -117,23 +116,44 @@ public class FeatureAttend extends AppCompatActivity {
         join_btn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                WriteBatch batch = db.batch();
-                DocumentReference updateJoin = db.collection("posts").document(documentID);
-                batch.update(updateJoin, "join", postsJoin+1);
 
-                if(!check){
-                    int trans = Integer.parseInt(postsJoin) + 1;
+
+                if (!check) {
+                    postsJoin = String.valueOf(Integer.parseInt(postsJoin) + 1);
+                    int trans = Integer.parseInt(postsJoin);
                     String joinNum = Integer.toString(trans);
                     join.setText(joinNum);
+                    join_btn.setText("참가 취소");
                     check = true;
-                }
-
-                else{
-                    int trans = Integer.parseInt(postsJoin) - 1;
+                } else {
+                    postsJoin = String.valueOf(Integer.parseInt(postsJoin) - 1);
+                    int trans = Integer.parseInt(postsJoin);
                     String joinNum = Integer.toString(trans);
                     join.setText(joinNum);
-                    check = true;
+                    join_btn.setText("공구 참여");
+                    check = false;
                 }
+                Log.d("FeatureAttend-log", "postsJoin: " + postsJoin);
+
+
+                // firestore 업데이트
+                DocumentReference postsID = db.collection("posts").document(documentID);
+
+                postsID
+                        .update("join", postsJoin)
+                        .addOnSuccessListener(new OnSuccessListener<Void>() {
+                            @Override
+                            public void onSuccess(Void aVoid) {
+                                Log.d("FeatureAttend-log", "DocumentSnapshot successfully updated!");
+                            }
+                        })
+                        .addOnFailureListener(new OnFailureListener() {
+                            @Override
+                            public void onFailure(@NonNull Exception e) {
+                                Log.w("FeatureAttend-log", "Error updating document", e);
+                            }
+                        });
+
             }
         });
     }
