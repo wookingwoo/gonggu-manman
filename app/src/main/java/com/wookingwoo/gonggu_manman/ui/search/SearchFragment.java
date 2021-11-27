@@ -1,6 +1,7 @@
 package com.wookingwoo.gonggu_manman.ui.search;
 
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -14,9 +15,15 @@ import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.Task;
+import com.google.firebase.firestore.FirebaseFirestore;
+import com.google.firebase.firestore.QueryDocumentSnapshot;
+import com.google.firebase.firestore.QuerySnapshot;
 import com.wookingwoo.gonggu_manman.R;
 import com.wookingwoo.gonggu_manman.SearchAdapter;
 import com.wookingwoo.gonggu_manman.SearchData;
+import com.wookingwoo.gonggu_manman.ui.home.Recomendation;
 
 import java.util.ArrayList;
 
@@ -119,9 +126,85 @@ public class SearchFragment extends Fragment {
         btn1.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                SearchData mainData = new SearchData(R.mipmap.ic_launcher, "  제목", "카테고리", "지역", "택배/직거래", "num/num", "num");
-                arrayList.add(mainData);
+
+                arrayList.removeAll(arrayList);
                 mainAdapter.notifyDataSetChanged();
+
+
+                FirebaseFirestore db = FirebaseFirestore.getInstance();
+
+
+                db.collection("posts")
+                        .get()
+                        .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
+                            @Override
+                            public void onComplete(@NonNull Task<QuerySnapshot> task) {
+                                if (task.isSuccessful()) {
+                                    for (QueryDocumentSnapshot document : task.getResult()) {
+                                        Log.d("get-posts-search", document.getId() + " => " + document.getData());
+
+                                        String postsTitle = (String) document.get("title");
+                                        Log.d("get-posts-search", "postsTitle->" + postsTitle);
+
+                                        String postsPrice = (String) document.get("price");
+                                        Log.d("get-posts-search", "postsPrice->" + postsPrice);
+
+
+                                        String postsImage = (String) document.get("image");
+                                        Log.d("get-posts-search", "postsImage->" + postsImage);
+
+                                        int joinNum = 0;
+
+                                        String joinStr = (String) document.get("join");
+                                        if ((joinStr != null) && (!joinStr.equals(""))) {
+                                            joinNum = Integer.parseInt(joinStr);
+
+                                        }
+                                        Log.d("get-posts-search", "joinNum->" + joinNum);
+
+
+                                        int recruitNum = 0;
+
+                                        String recruitStr = (String) document.get("recruit");
+                                        if ((recruitStr != null) && (!recruitStr.equals(""))) {
+                                            recruitNum = Integer.parseInt(recruitStr);
+
+                                        }
+                                        Log.d("get-posts-search", "recruitNum->" + recruitNum);
+
+
+                                        String documentID = (String) document.getId();
+                                        Log.d("get-posts-search", "documentID->" + documentID);
+
+
+                                        if ((postsTitle != null) && (!postsTitle.equals("")) && (postsImage != null) && (!postsImage.equals("")) && (joinNum < recruitNum)) {
+
+
+                                            SearchData mainData = new SearchData(R.mipmap.ic_launcher, postsTitle, "카테고리", "지역", "택배/직거래", "num/num", "num");
+                                            arrayList.add(mainData);
+                                            mainAdapter.notifyDataSetChanged();
+
+
+                                        }
+                                    }
+                                    mainAdapter.notifyDataSetChanged();
+
+                                } else {
+                                    Log.w("get-posts-search", "Error getting documents.", task.getException());
+
+                                    String emptyImage = "https://via.placeholder.com/300";
+
+
+                                    SearchData mainData = new SearchData(R.mipmap.ic_launcher, "  제목", "카테고리", "지역", "택배/직거래", "num/num", "num");
+                                    arrayList.add(mainData);
+                                    mainAdapter.notifyDataSetChanged();
+
+
+                                }
+                            }
+                        });
+
+
             }
         });
 
