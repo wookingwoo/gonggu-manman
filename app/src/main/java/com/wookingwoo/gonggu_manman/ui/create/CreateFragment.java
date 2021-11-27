@@ -68,7 +68,6 @@ public class CreateFragment extends Fragment {
         View v = inflater.inflate(R.layout.fragment_create, container, false);
 
 
-        userUid = FirebaseAuth.getInstance().getCurrentUser().getUid();
 
         title = (TextInputEditText) v.findViewById(R.id.post_title);
         category = (TextView) v.findViewById(R.id.post_cate_selected);
@@ -84,7 +83,90 @@ public class CreateFragment extends Fragment {
         List<String> cateList = new ArrayList<>();
 
         firebaseFirestore = FirebaseFirestore.getInstance();
-        if(userUid == null) {
+        firebaseAuth = FirebaseAuth.getInstance();
+
+        if(firebaseAuth.getCurrentUser() != null) {
+            userUid = firebaseAuth.getCurrentUser().getUid();
+            Task<QuerySnapshot> docRef = firebaseFirestore.collection("categories").get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
+                @Override
+                public void onComplete(@NonNull Task<QuerySnapshot> task) {
+                    if (task.isSuccessful()) {
+                        for (QueryDocumentSnapshot document : task.getResult()) {
+                            cateList.add(document.getId());
+                        }
+                    } else {
+                        Log.d(TAG, "Error getting documents: ", task.getException());
+                    }
+
+                }
+            });
+
+            ArrayAdapter<String> adapter = new ArrayAdapter<String>(getActivity().getApplicationContext(), android.R.layout.simple_spinner_item, cateList);
+            adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+            spinnerCate.setAdapter(adapter);
+            adapter.notifyDataSetChanged();
+
+            spinnerCate.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+                @Override
+                public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
+                    category.setText(spinnerCate.getSelectedItem().toString());
+                    Toast.makeText(getActivity(), cateList.get(i), Toast.LENGTH_SHORT).show();
+
+                }
+
+                @Override
+                public void onNothingSelected(AdapterView<?> adapterView) {
+
+                }
+            });
+
+            detail.addTextChangedListener(new TextWatcher() {
+                @Override
+                public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+
+                }
+                @Override
+                public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+                    String input = detail.getText().toString();
+                    wordcount.setText(input.length() + "/200 자");
+                }
+
+                @Override
+                public void afterTextChanged(Editable editable) {
+
+                }
+            });
+
+
+            saveBtn.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    if (TextUtils.isEmpty(title.getText().toString())) {
+                        title.setError("제목을 입력해주세요");
+                        title.requestFocus();
+                        return;
+                    }
+                    if (TextUtils.isEmpty(recruit.getText().toString())) {
+                        recruit.setError("최소 모집 인원을 입력해주세요");
+                        recruit.requestFocus();
+                        return;
+                    }
+                    if (TextUtils.isEmpty(price.getText().toString())) {
+                        price.setError("가격 정보를 입력해주세요");
+                        price.requestFocus();
+                        return;
+                    }
+                    if (TextUtils.isEmpty(detail.getText().toString())) {
+                        detail.setError("본문 내용을 입려해주세요");
+                        detail.requestFocus();
+                        return;
+                    }
+                    getChipGroupValues();
+                    uploadData();
+                }
+            });
+
+        } else {
             AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
             builder.setTitle("공구 등록은 회원만 가능합니다!");
             builder.setMessage("로그인이나 회원가입을 해주세요");
@@ -102,84 +184,7 @@ public class CreateFragment extends Fragment {
                 }
             });
         }
-        Task<QuerySnapshot> docRef = firebaseFirestore.collection("categories").get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
-            @Override
-            public void onComplete(@NonNull Task<QuerySnapshot> task) {
-                if (task.isSuccessful()) {
-                    for (QueryDocumentSnapshot document : task.getResult()) {
-                        cateList.add(document.getId());
-                    }
-                } else {
-                    Log.d(TAG, "Error getting documents: ", task.getException());
-                }
 
-            }
-        });
-
-        ArrayAdapter<String> adapter = new ArrayAdapter<String>(getActivity().getApplicationContext(), android.R.layout.simple_spinner_item, cateList);
-        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-        spinnerCate.setAdapter(adapter);
-        adapter.notifyDataSetChanged();
-
-        spinnerCate.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
-            @Override
-            public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
-                category.setText(spinnerCate.getSelectedItem().toString());
-                Toast.makeText(getActivity(), cateList.get(i), Toast.LENGTH_SHORT).show();
-
-            }
-
-            @Override
-            public void onNothingSelected(AdapterView<?> adapterView) {
-
-            }
-        });
-
-        detail.addTextChangedListener(new TextWatcher() {
-            @Override
-            public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
-
-            }
-            @Override
-            public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
-                String input = detail.getText().toString();
-                wordcount.setText(input.length() + "/200 자");
-            }
-
-            @Override
-            public void afterTextChanged(Editable editable) {
-
-            }
-        });
-
-
-        saveBtn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                if (TextUtils.isEmpty(title.getText().toString())) {
-                    title.setError("제목을 입력해주세요");
-                    title.requestFocus();
-                    return;
-                }
-                if (TextUtils.isEmpty(recruit.getText().toString())) {
-                    recruit.setError("최소 모집 인원을 입력해주세요");
-                    recruit.requestFocus();
-                    return;
-                }
-                if (TextUtils.isEmpty(price.getText().toString())) {
-                    price.setError("가격 정보를 입력해주세요");
-                    price.requestFocus();
-                    return;
-                }
-                if (TextUtils.isEmpty(detail.getText().toString())) {
-                    detail.setError("본문 내용을 입려해주세요");
-                    detail.requestFocus();
-                    return;
-                }
-                getChipGroupValues();
-                uploadData();
-            }
-        });
 
         return v;
     }
