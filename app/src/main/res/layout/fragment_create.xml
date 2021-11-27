@@ -103,6 +103,7 @@
             android:text="거래 방식"/>
 
         <com.google.android.material.chip.ChipGroup
+            android:id="@+id/chip_group"
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
 
@@ -169,11 +170,30 @@
                 android:layout_width="match_parent"
                 android:layout_height="90dp"
                 android:inputType="textMultiLine"
-                android:lines="10"
-                android:minLines="5"
+                android:lines="15"
+                android:minLines="10"
+                android:hint="내용을 입력해주세요"
                 android:scrollbars="vertical" />
 
         </com.google.android.material.textfield.TextInputLayout>
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/layout_wordcount"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_margin="5dp"
+        app:layout_constraintTop_toBottomOf="@id/layout_detail"
+        app:layout_constraintRight_toRightOf="parent">
+
+        <TextView
+            android:id="@+id/post_wordcount"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="5dp"
+            android:hint="글자수 표시"/>
+
     </LinearLayout>
 
     <LinearLayout
@@ -182,7 +202,7 @@
         android:layout_height="wrap_content"
         android:orientation="horizontal"
         android:layout_margin="5dp"
-        app:layout_constraintTop_toBottomOf="@id/layout_detail">
+        app:layout_constraintTop_toBottomOf="@id/layout_wordcount">
 
         <TextView
             android:layout_width="wrap_content"
@@ -197,12 +217,15 @@
             android:layout_height="wrap_content"/>
     </LinearLayout>
 
-    <Button
+    <androidx.appcompat.widget.AppCompatButton
         android:id="@+id/post_save"
+        app:layout_constraintTop_toBottomOf="@+id/layout_image"
+        app:layout_constraintRight_toRightOf="parent"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:background="@drawable/gonggu_gradient"
+        android:textColor="@color/white"
+        android:textStyle="bold"
         android:layout_gravity="right"
-        android:text="저장"
-        app:layout_constraintTop_toBottomOf="@+id/layout_image"
-        app:layout_constraintRight_toRightOf="parent"/>
+        android:text="저장"/>
 </androidx.constraintlayout.widget.ConstraintLayout>
