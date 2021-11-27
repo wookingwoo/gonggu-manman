@@ -20,7 +20,9 @@ import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.FirebaseFirestore;
 
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 import java.util.regex.Pattern;
 
@@ -32,6 +34,9 @@ public class JoinActivity extends AppCompatActivity {
     private FirebaseAuth firebaseAuth;
     FirebaseFirestore fStore;
     String UID;
+
+    List<String> attendList = new ArrayList<>();
+    List<String> likeList = new ArrayList<>();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -119,6 +124,9 @@ public class JoinActivity extends AppCompatActivity {
                         user.put("Email", userEMAIL);
                         user.put("Phone", userPHONE);
                         user.put("Address", userADDRESS);
+                        user.put("attend_post",attendList);
+                        user.put("like_post",likeList);
+
                         documentReference.set(user).addOnSuccessListener(new OnSuccessListener<Void>() {
                             @Override
                             public void onSuccess(Void unused) {
