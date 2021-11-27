@@ -10,6 +10,8 @@ import android.widget.Toast;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.bumptech.glide.Glide;
+
 import java.util.ArrayList;
 
 public class SearchAdapter extends RecyclerView.Adapter<SearchAdapter.CustomViewHolder> {
@@ -24,7 +26,7 @@ public class SearchAdapter extends RecyclerView.Adapter<SearchAdapter.CustomView
     @Override
     public SearchAdapter.CustomViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
 
-        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.item_list,parent,false);
+        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.item_list, parent, false);
         CustomViewHolder holder = new CustomViewHolder(view);
 
         return holder;
@@ -32,7 +34,10 @@ public class SearchAdapter extends RecyclerView.Adapter<SearchAdapter.CustomView
 
     @Override
     public void onBindViewHolder(@NonNull SearchAdapter.CustomViewHolder holder, int position) {
-        holder.iv_image.setImageResource(arrayList.get(position).getIv_image());
+
+        String imgURL = arrayList.get(position).getImgURL();
+        Glide.with(holder.iv_image.getContext()).load(imgURL).into(holder.iv_image);
+
         holder.name.setText(arrayList.get(position).getName());
         holder.name2.setText(arrayList.get(position).getName2());
         holder.name3.setText(arrayList.get(position).getName3());
@@ -42,11 +47,11 @@ public class SearchAdapter extends RecyclerView.Adapter<SearchAdapter.CustomView
 
         holder.itemView.setTag(position);
         holder.itemView.setOnClickListener(new View.OnClickListener() {
-           @Override
-           public void onClick(View v) {
-               String curName = holder.name.getText().toString();
-               Toast.makeText(v.getContext(), curName, Toast.LENGTH_SHORT).show();
-           }
+            @Override
+            public void onClick(View v) {
+                String curName = holder.name.getText().toString();
+                Toast.makeText(v.getContext(), curName, Toast.LENGTH_SHORT).show();
+            }
         });
 
         holder.itemView.setOnLongClickListener(new View.OnLongClickListener() {

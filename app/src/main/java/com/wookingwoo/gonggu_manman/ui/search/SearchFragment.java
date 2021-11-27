@@ -184,7 +184,7 @@ public class SearchFragment extends Fragment {
                                         if ((postsTitle != null) && (!postsTitle.equals("")) && (postsImage != null) && (!postsImage.equals("")) && (joinNum < recruitNum)) {
 
 
-                                            SearchData mainData = new SearchData(R.mipmap.ic_launcher, postsTitle, postsCategory, "지역", "택배/직거래", joinStr + "/" + recruitNum, "num");
+                                            SearchData mainData = new SearchData(postsImage, postsTitle, postsCategory, "지역", "택배/직거래", joinStr + "/" + recruitNum, "num");
                                             arrayList.add(mainData);
                                             mainAdapter.notifyDataSetChanged();
 
@@ -199,7 +199,7 @@ public class SearchFragment extends Fragment {
                                     String emptyImage = "https://via.placeholder.com/300";
 
 
-                                    SearchData mainData = new SearchData(R.mipmap.ic_launcher, "  제목", "카테고리", "지역", "택배/직거래", "num/num", "num");
+                                    SearchData mainData = new SearchData(emptyImage, "  제목", "카테고리", "지역", "택배/직거래", "num/num", "num");
                                     arrayList.add(mainData);
                                     mainAdapter.notifyDataSetChanged();
 

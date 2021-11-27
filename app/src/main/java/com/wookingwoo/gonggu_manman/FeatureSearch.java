@@ -26,9 +26,9 @@ public class FeatureSearch extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.fragment_search);
 
-        final Spinner spin1 = (Spinner)findViewById(R.id.spinner);
-        final Spinner spin2 = (Spinner)findViewById(R.id.spinner2);
-        final Spinner spin3 = (Spinner)findViewById(R.id.spinner3);
+        final Spinner spin1 = (Spinner) findViewById(R.id.spinner);
+        final Spinner spin2 = (Spinner) findViewById(R.id.spinner2);
+        final Spinner spin3 = (Spinner) findViewById(R.id.spinner3);
 
         adspin1 = ArrayAdapter.createFromResource(this, R.array.area, android.R.layout.simple_spinner_dropdown_item);
         adspin1.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
@@ -52,9 +52,7 @@ public class FeatureSearch extends AppCompatActivity {
                         public void onNothingSelected(AdapterView<?> adapterView) {
                         }
                     });
-                }
-
-                else if (adspin1.getItem(i).equals("인천광역시")) {
+                } else if (adspin1.getItem(i).equals("인천광역시")) {
                     adspin2 = ArrayAdapter.createFromResource(FeatureSearch.this, R.array.incheon, android.R.layout.simple_spinner_dropdown_item);
                     adspin2.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
                     spin2.setAdapter(adspin2);
@@ -100,11 +98,14 @@ public class FeatureSearch extends AppCompatActivity {
         mainAdapter = new SearchAdapter(arrayList);
         recyclerView.setAdapter(mainAdapter);
 
-        Button btn1 = (Button)findViewById(R.id.btn1);
+        Button btn1 = (Button) findViewById(R.id.btn1);
         btn1.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                SearchData mainData = new SearchData(R.mipmap.ic_launcher, "  제목", "카테고리", "지역", "택배/직거래","num/num", "num");
+
+                String emptyImage = "https://via.placeholder.com/300";
+
+                SearchData mainData = new SearchData(emptyImage, "  제목", "카테고리", "지역", "택배/직거래", "num/num", "num");
                 arrayList.add(mainData);
                 mainAdapter.notifyDataSetChanged();
             }
