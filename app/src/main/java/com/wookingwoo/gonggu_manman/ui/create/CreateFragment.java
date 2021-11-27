@@ -183,11 +183,13 @@ public class CreateFragment extends Fragment {
                     startActivity(new Intent(getActivity().getApplicationContext(), BottomNavigationActivity.class));
                 }
             });
+            AlertDialog stateDlg = builder.create();
+            stateDlg.show();
         }
-
 
         return v;
     }
+
     private void getChipGroupValues() {
         int chipCount = chipGroup.getChildCount();
         if(chipCount == 0) {
