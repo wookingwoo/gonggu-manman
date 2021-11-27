@@ -1,5 +1,6 @@
 package com.wookingwoo.gonggu_manman;
 
+import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -38,6 +39,9 @@ public class SearchAdapter extends RecyclerView.Adapter<SearchAdapter.CustomView
         String imgURL = arrayList.get(position).getImgURL();
         Glide.with(holder.iv_image.getContext()).load(imgURL).into(holder.iv_image);
 
+        String documentID = arrayList.get(position).getDocumentID();
+
+
         holder.name.setText(arrayList.get(position).getName());
         holder.name2.setText(arrayList.get(position).getName2());
         holder.name3.setText(arrayList.get(position).getName3());
@@ -49,8 +53,15 @@ public class SearchAdapter extends RecyclerView.Adapter<SearchAdapter.CustomView
         holder.itemView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                String curName = holder.name.getText().toString();
-                Toast.makeText(v.getContext(), curName, Toast.LENGTH_SHORT).show();
+//                String curName = holder.name.getText().toString();
+//                Toast.makeText(v.getContext(), curName, Toast.LENGTH_SHORT).show();
+
+                // FeatureAttend로 인텐트 전환
+                Intent detailIntent = new Intent(v.getContext(), FeatureAttend.class);
+                detailIntent.putExtra("documentID", documentID);
+                v.getContext().startActivity(detailIntent);
+
+
             }
         });
 

@@ -105,7 +105,7 @@ public class FeatureSearch extends AppCompatActivity {
 
                 String emptyImage = "https://via.placeholder.com/300";
 
-                SearchData mainData = new SearchData(emptyImage, "  제목", "카테고리", "지역", "택배/직거래", "num/num", "num");
+                SearchData mainData = new SearchData(emptyImage, "  제목", "카테고리", "지역", "택배/직거래", "num/num", "num", "mock-up");
                 arrayList.add(mainData);
                 mainAdapter.notifyDataSetChanged();
             }

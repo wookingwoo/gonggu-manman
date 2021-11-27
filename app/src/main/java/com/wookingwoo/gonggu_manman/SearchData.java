@@ -11,7 +11,10 @@ public class SearchData {
     private String name5;
     private String name6;
 
-    public SearchData(String imgURL, String name, String name2, String name3, String name4, String name5, String name6) {
+    private String documentID;
+
+
+    public SearchData(String imgURL, String name, String name2, String name3, String name4, String name5, String name6, String documentID) {
         this.imgURL = imgURL;
         this.name = name;
         this.name2 = name2;
@@ -19,6 +22,8 @@ public class SearchData {
         this.name4 = name4;
         this.name5 = name5;
         this.name6 = name6;
+        this.documentID = documentID;
+
     }
 
     public String getImgURL() {
@@ -78,4 +83,13 @@ public class SearchData {
     public void setName6(String name6) {
         this.name6 = name6;
     }
+
+    public String getDocumentID() {
+        return documentID;
+    }
+
+    public void setDocumentID(String documentID) {
+        this.documentID = documentID;
+    }
+
 }
