@@ -184,7 +184,7 @@ public class HomeFragment extends Fragment {
                                 int recruitNum = 0;
 
                                 String recruitStr = (String) document.get("recruit");
-                                if ((joinStr != null) && (!joinStr.equals(""))) {
+                                if ((recruitStr != null) && (!recruitStr.equals(""))) {
                                     recruitNum = Integer.parseInt(recruitStr);
 
                                 }
