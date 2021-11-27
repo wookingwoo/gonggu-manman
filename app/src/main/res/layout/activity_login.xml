@@ -1,16 +1,27 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    android:foregroundTint="#CD2828">
+
+    <ImageButton
+        android:id="@+id/mungssa_logo_btn"
+        android:layout_width="100dp"
+        android:layout_height="100dp"
+        android:layout_above="@+id/login_email"
+        android:layout_centerHorizontal="true"
+        android:layout_marginBottom="34dp"
+        android:src="@drawable/mungssa_logo" />
 
     <EditText
         android:id="@+id/login_email"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginLeft="25dp"
-        android:layout_marginRight="25dp"
-        android:layout_marginTop="30dp"
         android:layout_above="@+id/login_password"
+        android:layout_marginLeft="25dp"
+        android:layout_marginTop="30dp"
+        android:layout_marginRight="25dp"
         android:hint="이메일"
         android:minHeight="48dp" />
 
@@ -20,30 +31,35 @@
         android:layout_height="wrap_content"
         android:layout_centerVertical="true"
         android:layout_marginLeft="25dp"
-        android:layout_marginRight="25dp"
         android:layout_marginTop="10dp"
+        android:layout_marginRight="25dp"
         android:hint="비밀번호"
         android:inputType="textPassword"
         android:minHeight="48dp" />
 
-    <Button
+    <androidx.appcompat.widget.AppCompatButton
         android:id="@+id/login_button"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_below="@+id/login_password"
         android:layout_marginLeft="25dp"
         android:layout_marginRight="25dp"
-        android:layout_below="@+id/login_password"
-        android:text="로그인">
-    </Button>
+        android:layout_marginBottom="12dp"
+        android:background="@drawable/gonggu_gradient"
+        android:text="로그인"
+        android:textColor="@color/white"
+        android:textStyle="bold" />
 
-    <Button
+    <androidx.appcompat.widget.AppCompatButton
         android:id="@+id/join_button"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_below="@+id/login_button"
         android:layout_marginLeft="25dp"
         android:layout_marginRight="25dp"
-        android:layout_below="@+id/login_button"
-        android:text="회원가입">
-    </Button>
+        android:background="@drawable/gonggu_gradient"
+        android:textColor="@color/white"
+        android:textStyle="bold"
+        android:text="회원가입"/>
 
 </RelativeLayout>

@@ -2,6 +2,7 @@ package com.wookingwoo.gonggu_manman;
 
 import android.app.ProgressDialog;
 import android.content.Intent;
+import android.media.Image;
 import android.os.Bundle;
 import android.text.TextUtils;
 import android.view.View;
@@ -24,7 +25,7 @@ import java.util.regex.Pattern;
 public class LoginActivity extends AppCompatActivity {
     EditText email, password;
     Button login, join;
-    ImageButton itemPageBtn;
+    ImageButton logoBtn;
     FirebaseAuth firebaseAuth;
 
     @Override
@@ -36,6 +37,7 @@ public class LoginActivity extends AppCompatActivity {
         password = (EditText) findViewById(R.id.login_password);
         login = (Button) findViewById(R.id.login_button);
         join = (Button) findViewById(R.id.join_button);
+        logoBtn = (ImageButton) findViewById(R.id.mungssa_logo_btn);
 
         firebaseAuth = FirebaseAuth.getInstance();
 
