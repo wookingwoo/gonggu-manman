@@ -153,6 +153,10 @@ public class SearchFragment extends Fragment {
                                         String postsImage = (String) document.get("image");
                                         Log.d("get-posts-search", "postsImage->" + postsImage);
 
+                                        String postsCategory = (String) document.get("category");
+                                        Log.d("get-posts-search", "postsCategory->" + postsCategory);
+
+
                                         int joinNum = 0;
 
                                         String joinStr = (String) document.get("join");
@@ -180,7 +184,7 @@ public class SearchFragment extends Fragment {
                                         if ((postsTitle != null) && (!postsTitle.equals("")) && (postsImage != null) && (!postsImage.equals("")) && (joinNum < recruitNum)) {
 
 
-                                            SearchData mainData = new SearchData(R.mipmap.ic_launcher, postsTitle, "카테고리", "지역", "택배/직거래", "num/num", "num");
+                                            SearchData mainData = new SearchData(R.mipmap.ic_launcher, postsTitle, postsCategory, "지역", "택배/직거래", joinStr + "/" + recruitNum, "num");
                                             arrayList.add(mainData);
                                             mainAdapter.notifyDataSetChanged();
 
