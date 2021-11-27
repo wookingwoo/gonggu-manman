@@ -5,7 +5,6 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.animation.Animator;
 import android.util.Log;
 import android.view.View;
 import android.view.animation.Animation;
@@ -17,6 +16,8 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.OnFailureListener;
+import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.firestore.DocumentReference;
@@ -26,9 +27,6 @@ import com.google.firebase.firestore.QuerySnapshot;
 
 import com.bumptech.glide.Glide;
 import com.google.firebase.firestore.WriteBatch;
-import com.wookingwoo.gonggu_manman.searchTitle.SearchActivity;
-
-import org.w3c.dom.Document;
 
 public class FeatureAttend extends AppCompatActivity {
     ScaleAnimation scaleAnimation;
@@ -38,6 +36,7 @@ public class FeatureAttend extends AppCompatActivity {
     FirebaseAuth firebaseAuth;
     FirebaseFirestore db = FirebaseFirestore.getInstance();
 
+    String documentID;
     boolean check;
     String postsJoin;
 
@@ -56,6 +55,9 @@ public class FeatureAttend extends AppCompatActivity {
         TextView join = (TextView) findViewById(R.id.Join);
         Button join_btn = (Button) findViewById(R.id.button2);
 
+        Intent intent = getIntent(); /*데이터 수신*/
+        documentID = intent.getExtras().getString("documentID");
+
 
         scaleAnimation.setDuration(500);
         bounceInterpolator = new BounceInterpolator();
@@ -69,12 +71,6 @@ public class FeatureAttend extends AppCompatActivity {
                 compoundButton.startAnimation(scaleAnimation);
             }
         });
-
-
-        // Intent 데이터 수신 (홈화면)
-        Intent homeIntent = getIntent();
-        String documentID = homeIntent.getExtras().getString("documentID"); /*String형*/
-
 
         db.collection("posts").get()
                 .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
@@ -90,20 +86,22 @@ public class FeatureAttend extends AppCompatActivity {
 //                        }
 
                         for (QueryDocumentSnapshot document : task.getResult()) {
-                            String postsTitle = (String) document.get("title");
-                            String postsJoin = (String) document.get("join");
-                            String postsImage = (String) document.get("image");
-                            String postsRecruit = (String) document.get("recruit");
-                            String postsWriter = (String) document.get("writer");
-                            String postsDetail = (String) document.get("detail");
                             String postDocumentID = (String) document.getId();
 
                             if (postDocumentID.equals(documentID)) {
-                                Log.d("get-posts-firestore", "postsTitle->" + postsTitle);
-                                Log.d("get-posts-firestore", "postsImage->" + postsImage);
-                                Log.d("get-posts-firestore", "documentID->" + documentID);
+                                String postsTitle = (String) document.get("title");
+                                postsJoin = (String) document.get("join");
+                                String postsImage = (String) document.get("image");
+                                String postsRecruit = (String) document.get("recruit");
+                                String postsWriter = (String) document.get("writer");
+                                String postsDetail = (String) document.get("detail");
+
+//                                Log.d("get-posts-firestore", "postsTitle->" + postsTitle);
+//                                Log.d("get-posts-firestore", "postsImage->" + postsImage);
+//                                Log.d("get-posts-firestore", "documentID->" + documentID);
 
                                 Glide.with(FeatureAttend.this).load(postsImage).into(load);
+
                                 join.setText(postsJoin);
                                 recruit.setText(postsRecruit);
                                 title.setText(postsTitle);
@@ -118,21 +116,44 @@ public class FeatureAttend extends AppCompatActivity {
         join_btn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                WriteBatch batch = db.batch();
-                DocumentReference updateJoin = db.collection("posts").document("join");
-                batch.update(updateJoin, "join", postsJoin + 1);
+
 
                 if (!check) {
-                    int trans = Integer.parseInt(postsJoin) + 1;
+                    postsJoin = String.valueOf(Integer.parseInt(postsJoin) + 1);
+                    int trans = Integer.parseInt(postsJoin);
                     String joinNum = Integer.toString(trans);
                     join.setText(joinNum);
+                    join_btn.setText("참가 취소");
                     check = true;
                 } else {
-                    int trans = Integer.parseInt(postsJoin) - 1;
+                    postsJoin = String.valueOf(Integer.parseInt(postsJoin) - 1);
+                    int trans = Integer.parseInt(postsJoin);
                     String joinNum = Integer.toString(trans);
                     join.setText(joinNum);
-                    check = true;
+                    join_btn.setText("공구 참여");
+                    check = false;
                 }
+                Log.d("FeatureAttend-log", "postsJoin: " + postsJoin);
+
+
+                // firestore 업데이트
+                DocumentReference postsID = db.collection("posts").document(documentID);
+
+                postsID
+                        .update("join", postsJoin)
+                        .addOnSuccessListener(new OnSuccessListener<Void>() {
+                            @Override
+                            public void onSuccess(Void aVoid) {
+                                Log.d("FeatureAttend-log", "DocumentSnapshot successfully updated!");
+                            }
+                        })
+                        .addOnFailureListener(new OnFailureListener() {
+                            @Override
+                            public void onFailure(@NonNull Exception e) {
+                                Log.w("FeatureAttend-log", "Error updating document", e);
+                            }
+                        });
+
             }
         });
     }

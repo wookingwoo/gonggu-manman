@@ -171,11 +171,31 @@ public class HomeFragment extends Fragment {
                                 String postsImage = (String) document.get("image");
                                 Log.d("get-posts-firestore", "postsImage->" + postsImage);
 
+                                int joinNum = 0;
+
+                                String joinStr = (String) document.get("join");
+                                if ((joinStr != null) && (!joinStr.equals(""))) {
+                                    joinNum = Integer.parseInt(joinStr);
+
+                                }
+                                Log.d("get-posts-firestore", "joinNum->" + joinNum);
+
+
+                                int recruitNum = 0;
+
+                                String recruitStr = (String) document.get("recruit");
+                                if ((joinStr != null) && (!joinStr.equals(""))) {
+                                    recruitNum = Integer.parseInt(recruitStr);
+
+                                }
+                                Log.d("get-posts-firestore", "recruitNum->" + recruitNum);
+
+
                                 String documentID = (String) document.getId();
                                 Log.d("get-posts-firestore", "documentID->" + documentID);
 
 
-                                if ((postsTitle != null) && (!postsTitle.equals("")) && (postsImage != null) && (!postsImage.equals(""))) {
+                                if ((postsTitle != null) && (!postsTitle.equals("")) && (postsImage != null) && (!postsImage.equals("")) && (joinNum < recruitNum)) {
                                     Recomendation recommendationFS = new Recomendation(postsImage, postsTitle, postsPrice + "원", documentID);
                                     recomendationArrayList.add(recommendationFS);
                                 }
