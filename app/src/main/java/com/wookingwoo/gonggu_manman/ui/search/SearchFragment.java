@@ -8,21 +8,15 @@ import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.Spinner;
-import android.widget.TextView;
 
 import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
-import androidx.lifecycle.Observer;
-import androidx.lifecycle.ViewModelProvider;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.wookingwoo.gonggu_manman.FeatureSearch;
 import com.wookingwoo.gonggu_manman.R;
 import com.wookingwoo.gonggu_manman.SearchAdapter;
 import com.wookingwoo.gonggu_manman.SearchData;
-import com.wookingwoo.gonggu_manman.databinding.FragmentSearchBinding;
 
 import java.util.ArrayList;
 
@@ -32,7 +26,7 @@ public class SearchFragment extends Fragment {
 //    private FragmentSearchBinding binding;
 
 
-    ArrayAdapter<CharSequence> adspin1, adspin2;
+    ArrayAdapter<CharSequence> adspin1, adspin2, adspin3;
 
     private ArrayList<SearchData> arrayList;
     private SearchAdapter mainAdapter;
@@ -52,6 +46,7 @@ public class SearchFragment extends Fragment {
 
         final Spinner spin1 = (Spinner) v.findViewById(R.id.spinner);
         final Spinner spin2 = (Spinner) v.findViewById(R.id.spinner2);
+        final Spinner spin3 = (Spinner) v.findViewById(R.id.spinner3);
 
         adspin1 = ArrayAdapter.createFromResource(getActivity(), R.array.area, android.R.layout.simple_spinner_dropdown_item);
         adspin1.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
@@ -89,6 +84,21 @@ public class SearchFragment extends Fragment {
                         }
                     });
                 }
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> adapterView) {
+            }
+        });
+
+        adspin3 = ArrayAdapter.createFromResource(getActivity(), R.array.categories, android.R.layout.simple_spinner_dropdown_item);
+        adspin3.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+
+        spin3.setAdapter(adspin3);
+        spin3.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+
+            @Override
+            public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
             }
 
             @Override

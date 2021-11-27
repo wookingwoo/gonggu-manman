@@ -1,9 +1,5 @@
 package com.wookingwoo.gonggu_manman;
 
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.recyclerview.widget.LinearLayoutManager;
-import androidx.recyclerview.widget.RecyclerView;
-
 import android.os.Bundle;
 import android.view.View;
 import android.widget.AdapterView;
@@ -11,11 +7,14 @@ import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.Spinner;
 
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
+
 import java.util.ArrayList;
 
 public class FeatureSearch extends AppCompatActivity {
-//    뾰로로롱
-    ArrayAdapter<CharSequence> adspin1, adspin2;
+    ArrayAdapter<CharSequence> adspin1, adspin2, adspin3;
 
     private ArrayList<SearchData> arrayList;
     private SearchAdapter mainAdapter;
@@ -29,6 +28,7 @@ public class FeatureSearch extends AppCompatActivity {
 
         final Spinner spin1 = (Spinner)findViewById(R.id.spinner);
         final Spinner spin2 = (Spinner)findViewById(R.id.spinner2);
+        final Spinner spin3 = (Spinner)findViewById(R.id.spinner3);
 
         adspin1 = ArrayAdapter.createFromResource(this, R.array.area, android.R.layout.simple_spinner_dropdown_item);
         adspin1.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
@@ -74,6 +74,22 @@ public class FeatureSearch extends AppCompatActivity {
             public void onNothingSelected(AdapterView<?> adapterView) {
             }
         });
+
+        adspin3 = ArrayAdapter.createFromResource(this, R.array.categories, android.R.layout.simple_spinner_dropdown_item);
+        adspin3.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+
+        spin3.setAdapter(adspin3);
+        spin3.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+
+            @Override
+            public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> adapterView) {
+            }
+        });
+
 
         recyclerView = (RecyclerView) findViewById((R.id.rv));
         linearLayoutManager = new LinearLayoutManager(this);
