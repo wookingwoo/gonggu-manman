@@ -23,7 +23,6 @@ import com.google.firebase.firestore.QuerySnapshot;
 import com.wookingwoo.gonggu_manman.R;
 import com.wookingwoo.gonggu_manman.SearchAdapter;
 import com.wookingwoo.gonggu_manman.SearchData;
-import com.wookingwoo.gonggu_manman.ui.home.Recomendation;
 
 import java.util.ArrayList;
 
@@ -185,7 +184,7 @@ public class SearchFragment extends Fragment {
                                         if ((postsTitle != null) && (!postsTitle.equals("")) && (postsImage != null) && (!postsImage.equals("")) && (joinNum < recruitNum)) {
 
 
-                                            SearchData mainData = new SearchData(postsImage, postsTitle, postsCategory, "지역", "택배/직거래", joinStr + "/" + recruitNum, "num", documentID);
+                                            SearchData mainData = new SearchData(postsImage, postsTitle, postsCategory, "지역", "택배/직거래", joinStr + "/" + recruitNum, postsPrice + "원", documentID);
                                             arrayList.add(mainData);
                                             mainAdapter.notifyDataSetChanged();
 
