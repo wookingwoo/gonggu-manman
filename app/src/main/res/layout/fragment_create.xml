@@ -199,7 +199,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="90dp"
                 android:inputType="textMultiLine"
-                android:lines="15"
+                android:lines="25"
                 android:minLines="10"
                 android:hint="내용을 입력해주세요"
                 android:scrollbars="vertical" />

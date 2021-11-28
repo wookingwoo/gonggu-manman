@@ -146,7 +146,7 @@ public class CreateFragment extends Fragment {
                 @Override
                 public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
                     String input = detail.getText().toString();
-                    wordcount.setText(input.length() + "/200 자");
+                    wordcount.setText(input.length() + "/500 자");
                 }
 
                 @Override
