@@ -48,7 +48,7 @@ public class FeatureAttend extends AppCompatActivity {
     boolean check;
     String postsJoin;
     String postsRecruit;
-    String U
+    String UID;
     ArrayList<String> attend;
 
     @Override
@@ -134,10 +134,9 @@ public class FeatureAttend extends AppCompatActivity {
                     postsJoin = String.valueOf(Integer.parseInt(postsJoin) + 1);
                     int total = Integer.parseInt(postsRecruit);
                     int trans = Integer.parseInt(postsJoin);
-                    if(trans>total){
-                        Toast.makeText(FeatureAttend.this, "참여인원이 꽉 찼습니다. 다음에 만나요~" , Toast.LENGTH_LONG).show();
-                    }
-                    else{
+                    if (trans > total) {
+                        Toast.makeText(FeatureAttend.this, "참여인원이 꽉 찼습니다. 다음에 만나요~", Toast.LENGTH_LONG).show();
+                    } else {
                         String joinNum = Integer.toString(trans);
                         join.setText(joinNum);
                         join_btn.setText("참가 취소");
@@ -175,7 +174,8 @@ public class FeatureAttend extends AppCompatActivity {
             }
         });
     }
-    public void Update(){
+
+    public void Update() {
         DocumentReference user = db.collection("users").document(UID);
         user
                 .update("attend_list", attend)
