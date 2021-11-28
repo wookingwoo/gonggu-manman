@@ -312,6 +312,10 @@ public class SearchFragment extends Fragment {
 
             @Override
             public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
+
+                selectedCategory = spin3.getSelectedItem().toString();
+                Log.d("get-posts-search", "selectedCategory: " + selectedCategory);
+
             }
 
             @Override
@@ -380,10 +384,9 @@ public class SearchFragment extends Fragment {
                                         String recruitStr = (String) document.get("recruit");
                                         if ((recruitStr != null) && (!recruitStr.equals(""))) {
                                             recruitNum = Integer.parseInt(recruitStr);
-
                                         }
-                                        Log.d("get-posts-search", "recruitNum->" + recruitNum);
 
+                                        Log.d("get-posts-search", "recruitNum->" + recruitNum);
 
                                         String documentID = (String) document.getId();
                                         Log.d("get-posts-search", "documentID->" + documentID);
@@ -397,8 +400,10 @@ public class SearchFragment extends Fragment {
 //                                        카테고리와, 지역 if문으로 비교해서 조건 추가
                                         if ((postsTitle != null) && (!postsTitle.equals("")) && (postsImage != null) && (!postsImage.equals(""))) {
 
+                                            Log.d("get-posts-search", "selectedCategory::: " + selectedCategory);
 
-                                            if ((selectedRegion2 == null) || (postsSigungu.equals(selectedRegion2))) {
+
+                                            if (((selectedRegion2 == null) || (postsSigungu.equals(selectedRegion2))) && ((selectedCategory == null) || (selectedCategory.equals("선택")) || (postsCategory.equals(selectedCategory)))) {
                                                 SearchData mainData = new SearchData(postsImage, postsTitle, postsCategory, postsSigungu, method.toString(), joinStr + "/" + recruitNum, postsPrice + "원", documentID);
                                                 arrayList.add(mainData);
                                                 mainAdapter.notifyDataSetChanged();
