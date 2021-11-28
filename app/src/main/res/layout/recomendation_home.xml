@@ -36,22 +36,12 @@
 
         <TextView
             android:id="@+id/price"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
             android:layout_marginRight="5dp"
+            android:gravity="center"
             android:text="000원" />
 
-        <Button
-            android:id="@+id/button"
-            style="@style/Widget.AppCompat.Button.Small"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:gravity="center"
-            android:text="참가"
-            android:textSize="12sp"
-            android:minHeight="0dp"
-            android:minWidth="0dp"
-            />
     </LinearLayout>
 
 </LinearLayout>
