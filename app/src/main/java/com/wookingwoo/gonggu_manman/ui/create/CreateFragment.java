@@ -53,11 +53,11 @@ public class CreateFragment extends Fragment {
     FirebaseAuth firebaseAuth;
     TextInputEditText title, recruit, price, detail;
     ChipGroup chipGroup;
-    TextView category, wordcount;
+    TextView wordcount;
     EditText imgUrl;
     Spinner spinnerCate;
     Button saveBtn;
-    String userUid;
+    String userUid, category;
 
     private Spinner spinnerCity, spinnerSigungu, spinnerDong;
     private ArrayAdapter<String> arrayAdapter;
@@ -72,7 +72,6 @@ public class CreateFragment extends Fragment {
 
 
         title = (TextInputEditText) v.findViewById(R.id.post_title);
-        category = (TextView) v.findViewById(R.id.post_cate_selected);
         wordcount = (TextView) v.findViewById(R.id.post_wordcount);
         recruit = (TextInputEditText) v.findViewById(R.id.post_recruit);
         price = (TextInputEditText) v.findViewById(R.id.post_price);
@@ -103,22 +102,41 @@ public class CreateFragment extends Fragment {
                 }
             });
 
-            ArrayAdapter<String> adapter = new ArrayAdapter<String>(getActivity().getApplicationContext(), android.R.layout.simple_spinner_item, cateList);
-            adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-            spinnerCate.setAdapter(adapter);
-            adapter.notifyDataSetChanged();
+//            ArrayAdapter<String> adapter = new ArrayAdapter<String>(getActivity(), android.R.layout.simple_spinner_item, cateList);
+//            adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+//            spinnerCate.setAdapter(adapter);
+//            adapter.notifyDataSetChanged();
+//
+//            spinnerCate.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+//                @Override
+//                public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
+//                    category.setText(spinnerCate.getSelectedItem().toString());
+//                    Toast.makeText(getActivity(), cateList.get(i), Toast.LENGTH_SHORT).show();
+//
+//                }
+//
+//                @Override
+//                public void onNothingSelected(AdapterView<?> adapterView) {
+//
+//                }
+//            });
 
+            ArrayAdapter<CharSequence> adapter;
+
+            adapter = ArrayAdapter.createFromResource(getActivity(), R.array.categories, android.R.layout.simple_spinner_dropdown_item);
+            adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+
+            spinnerCate.setAdapter(adapter);
             spinnerCate.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+
                 @Override
                 public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
-                    category.setText(spinnerCate.getSelectedItem().toString());
-                    Toast.makeText(getActivity(), cateList.get(i), Toast.LENGTH_SHORT).show();
-
+                    category = spinnerCate.getSelectedItem().toString();
+                    Log.d(TAG, category + "category selected");
                 }
 
                 @Override
                 public void onNothingSelected(AdapterView<?> adapterView) {
-
                 }
             });
 
@@ -126,6 +144,7 @@ public class CreateFragment extends Fragment {
             arrayAdapter = new ArrayAdapter<String>(getActivity(), android.R.layout.simple_spinner_item, (String[]) getResources().getStringArray(R.array.spinner_region));
             arrayAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
             spinnerCity.setAdapter(arrayAdapter);
+            spinnerCity.setSelection(0);
 
             spinnerSigungu = (Spinner) v.findViewById(R.id.post_spinner_sigungu);
             spinnerDong = (Spinner) v.findViewById(R.id.post_spinner_dong);
@@ -426,7 +445,7 @@ public class CreateFragment extends Fragment {
 
     private void uploadData() {
         final String titleStr = title.getText().toString();
-        final String cateStr = category.getText().toString();
+        final String cateStr = category;
         final String recruitStr = recruit.getText().toString().trim();
         final String priceStr = price.getText().toString().trim();
         final String detailStr = detail.getText().toString();

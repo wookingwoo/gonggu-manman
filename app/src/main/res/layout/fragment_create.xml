@@ -73,11 +73,6 @@
             android:layout_gravity="center"
             android:text="카테고리"/>
 
-        <TextView
-            android:id="@+id/post_cate_selected"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:hint="카테고리 선택"/>
 
         <Spinner
             android:id="@+id/post_cate_main"
