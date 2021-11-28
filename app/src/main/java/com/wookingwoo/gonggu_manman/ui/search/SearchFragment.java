@@ -34,6 +34,8 @@ public class SearchFragment extends Fragment {
     private RecyclerView recyclerView;
     private LinearLayoutManager linearLayoutManager;
 
+    String selectedRegion1, selectedRegion2, selectedCategory;
+
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
 
@@ -276,6 +278,25 @@ public class SearchFragment extends Fragment {
                         }
                     });
                 }
+
+
+                spin2.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+                    @Override
+                    public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
+
+
+                        selectedRegion2 = spin2.getSelectedItem().toString();
+                        Log.d("get-posts-search", "selectedRegion2: " + selectedRegion2);
+
+
+                    }
+
+                    @Override
+                    public void onNothingSelected(AdapterView<?> adapterView) {
+                    }
+                });
+
+
             }
 
             @Override
@@ -371,15 +392,17 @@ public class SearchFragment extends Fragment {
                                         Log.d("get-posts-search", "postsTitle->" + postsTitle);
 
                                         String postsSigungu = (String) document.get("sigungu");
-                                        Log.d("get-posts-search", "postsTitle->" + postsTitle);
+                                        Log.d("get-posts-search", "postsSigungu->" + postsSigungu);
 
 //                                        카테고리와, 지역 if문으로 비교해서 조건 추가
-                                        if ((postsTitle != null) && (!postsTitle.equals("")) && (postsImage != null) && (!postsImage.equals("")) && (joinNum < recruitNum)) {
+                                        if ((postsTitle != null) && (!postsTitle.equals("")) && (postsImage != null) && (!postsImage.equals(""))) {
 
 
-                                            SearchData mainData = new SearchData(postsImage, postsTitle, postsCategory, postsSigungu, method.toString(), joinStr + "/" + recruitNum, postsPrice + "원", documentID);
-                                            arrayList.add(mainData);
-                                            mainAdapter.notifyDataSetChanged();
+                                            if ((selectedRegion2 == null) || (postsSigungu.equals(selectedRegion2))) {
+                                                SearchData mainData = new SearchData(postsImage, postsTitle, postsCategory, postsSigungu, method.toString(), joinStr + "/" + recruitNum, postsPrice + "원", documentID);
+                                                arrayList.add(mainData);
+                                                mainAdapter.notifyDataSetChanged();
+                                            }
 
 
                                         }
