@@ -202,6 +202,8 @@ public class CreateFragment extends Fragment {
                 }
             });
             AlertDialog stateDlg = builder.create();
+            stateDlg.setCancelable(false);
+            stateDlg.setCanceledOnTouchOutside(false);
             stateDlg.show();
         }
 

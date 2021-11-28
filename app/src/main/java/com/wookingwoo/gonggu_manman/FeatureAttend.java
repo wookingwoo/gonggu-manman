@@ -48,7 +48,7 @@ public class FeatureAttend extends AppCompatActivity {
     boolean check;
     String postsJoin;
     String postsRecruit;
-    String U
+    String UID;
     ArrayList<String> attend;
 
     @Override
