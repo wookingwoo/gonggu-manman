@@ -181,7 +181,7 @@ public class FeatureAttend extends AppCompatActivity {
 
 
                                     List<String> like_post
-                                            = (List<String>) document.get("attend_post");
+                                            = (List<String>) document.get("like_post");
                                     Log.d("feature-attend", "like_post->" + like_post
                                     );
 
