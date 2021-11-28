@@ -44,7 +44,7 @@ public class HomeFragment extends Fragment {
     private LinearLayoutManager recomendationLinearLayoutManager;
 
 
-    private FragmentHomeBinding binding; // binding 삭제 금지
+//    private FragmentHomeBinding binding;
 
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
@@ -184,7 +184,7 @@ public class HomeFragment extends Fragment {
                                 int recruitNum = 0;
 
                                 String recruitStr = (String) document.get("recruit");
-                                if ((joinStr != null) && (!joinStr.equals(""))) {
+                                if ((recruitStr != null) && (!recruitStr.equals(""))) {
                                     recruitNum = Integer.parseInt(recruitStr);
 
                                 }
@@ -229,9 +229,9 @@ public class HomeFragment extends Fragment {
         return v;
     }
 
-    @Override
-    public void onDestroyView() {
-        super.onDestroyView();
-        binding = null;
-    }
+//    @Override
+//    public void onDestroyView() {
+//        super.onDestroyView();
+//        binding = null;
+//    }
 }

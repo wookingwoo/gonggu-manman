@@ -1,9 +1,5 @@
 package com.wookingwoo.gonggu_manman;
 
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.recyclerview.widget.LinearLayoutManager;
-import androidx.recyclerview.widget.RecyclerView;
-
 import android.os.Bundle;
 import android.view.View;
 import android.widget.AdapterView;
@@ -11,11 +7,14 @@ import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.Spinner;
 
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
+
 import java.util.ArrayList;
 
 public class FeatureSearch extends AppCompatActivity {
-//    뾰로로롱
-    ArrayAdapter<CharSequence> adspin1, adspin2;
+    ArrayAdapter<CharSequence> adspin1, adspin2, adspin3;
 
     private ArrayList<SearchData> arrayList;
     private SearchAdapter mainAdapter;
@@ -27,8 +26,9 @@ public class FeatureSearch extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.fragment_search);
 
-        final Spinner spin1 = (Spinner)findViewById(R.id.spinner);
-        final Spinner spin2 = (Spinner)findViewById(R.id.spinner2);
+        final Spinner spin1 = (Spinner) findViewById(R.id.spinner);
+        final Spinner spin2 = (Spinner) findViewById(R.id.spinner2);
+        final Spinner spin3 = (Spinner) findViewById(R.id.spinner3);
 
         adspin1 = ArrayAdapter.createFromResource(this, R.array.area, android.R.layout.simple_spinner_dropdown_item);
         adspin1.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
@@ -52,9 +52,7 @@ public class FeatureSearch extends AppCompatActivity {
                         public void onNothingSelected(AdapterView<?> adapterView) {
                         }
                     });
-                }
-
-                else if (adspin1.getItem(i).equals("인천광역시")) {
+                } else if (adspin1.getItem(i).equals("인천광역시")) {
                     adspin2 = ArrayAdapter.createFromResource(FeatureSearch.this, R.array.incheon, android.R.layout.simple_spinner_dropdown_item);
                     adspin2.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
                     spin2.setAdapter(adspin2);
@@ -75,6 +73,22 @@ public class FeatureSearch extends AppCompatActivity {
             }
         });
 
+        adspin3 = ArrayAdapter.createFromResource(this, R.array.categories, android.R.layout.simple_spinner_dropdown_item);
+        adspin3.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+
+        spin3.setAdapter(adspin3);
+        spin3.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+
+            @Override
+            public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> adapterView) {
+            }
+        });
+
+
         recyclerView = (RecyclerView) findViewById((R.id.rv));
         linearLayoutManager = new LinearLayoutManager(this);
         recyclerView.setLayoutManager(linearLayoutManager);
@@ -84,11 +98,14 @@ public class FeatureSearch extends AppCompatActivity {
         mainAdapter = new SearchAdapter(arrayList);
         recyclerView.setAdapter(mainAdapter);
 
-        Button btn1 = (Button)findViewById(R.id.btn1);
+        Button btn1 = (Button) findViewById(R.id.btn1);
         btn1.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                SearchData mainData = new SearchData(R.mipmap.ic_launcher, "  제목", "카테고리", "지역", "택배/직거래","num/num", "num");
+
+                String emptyImage = "https://via.placeholder.com/300";
+
+                SearchData mainData = new SearchData(emptyImage, "  제목", "카테고리", "지역", "택배/직거래", "num/num", "num", "mock-up");
                 arrayList.add(mainData);
                 mainAdapter.notifyDataSetChanged();
             }
