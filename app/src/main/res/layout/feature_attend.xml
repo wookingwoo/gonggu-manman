@@ -103,7 +103,7 @@
         android:id="@+id/materialDivider"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="352dp"
+        android:layout_marginTop="364dp"
         app:dividerInsetEnd="16dp"
         app:dividerInsetStart="16dp"
         app:layout_constraintEnd_toEndOf="parent"
@@ -136,7 +136,7 @@
 
     <TextView
         android:id="@+id/Context"
-        android:layout_width="wrap_content"
+        android:layout_width="373dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="16dp"
         android:layout_marginTop="20dp"
@@ -149,7 +149,7 @@
         android:id="@+id/materialDivider2"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="32dp"
+        android:layout_marginTop="36dp"
         app:dividerInsetEnd="16dp"
         app:dividerInsetStart="16dp"
         app:layout_constraintEnd_toEndOf="parent"
