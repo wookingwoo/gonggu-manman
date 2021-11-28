@@ -1,14 +1,18 @@
-package com.wookingwoo.gonggu_manman;
+package com.wookingwoo.gonggu_manman.ui.search;
 
+import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
+
+import com.bumptech.glide.Glide;
+import com.wookingwoo.gonggu_manman.FeatureAttend;
+import com.wookingwoo.gonggu_manman.R;
 
 import java.util.ArrayList;
 
@@ -24,7 +28,7 @@ public class SearchAdapter extends RecyclerView.Adapter<SearchAdapter.CustomView
     @Override
     public SearchAdapter.CustomViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
 
-        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.item_list,parent,false);
+        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.item_list, parent, false);
         CustomViewHolder holder = new CustomViewHolder(view);
 
         return holder;
@@ -32,7 +36,13 @@ public class SearchAdapter extends RecyclerView.Adapter<SearchAdapter.CustomView
 
     @Override
     public void onBindViewHolder(@NonNull SearchAdapter.CustomViewHolder holder, int position) {
-        holder.iv_image.setImageResource(arrayList.get(position).getIv_image());
+
+        String imgURL = arrayList.get(position).getImgURL();
+        Glide.with(holder.iv_image.getContext()).load(imgURL).into(holder.iv_image);
+
+        String documentID = arrayList.get(position).getDocumentID();
+
+
         holder.name.setText(arrayList.get(position).getName());
         holder.name2.setText(arrayList.get(position).getName2());
         holder.name3.setText(arrayList.get(position).getName3());
@@ -42,11 +52,18 @@ public class SearchAdapter extends RecyclerView.Adapter<SearchAdapter.CustomView
 
         holder.itemView.setTag(position);
         holder.itemView.setOnClickListener(new View.OnClickListener() {
-           @Override
-           public void onClick(View v) {
-               String curName = holder.name.getText().toString();
-               Toast.makeText(v.getContext(), curName, Toast.LENGTH_SHORT).show();
-           }
+            @Override
+            public void onClick(View v) {
+//                String curName = holder.name.getText().toString();
+//                Toast.makeText(v.getContext(), curName, Toast.LENGTH_SHORT).show();
+
+                // FeatureAttend로 인텐트 전환
+                Intent detailIntent = new Intent(v.getContext(), FeatureAttend.class);
+                detailIntent.putExtra("documentID", documentID);
+                v.getContext().startActivity(detailIntent);
+
+
+            }
         });
 
         holder.itemView.setOnLongClickListener(new View.OnLongClickListener() {

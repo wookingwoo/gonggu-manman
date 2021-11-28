@@ -1,7 +1,9 @@
-package com.wookingwoo.gonggu_manman;
+package com.wookingwoo.gonggu_manman.ui.search;
 
 public class SearchData {
-    private int iv_image;
+
+    private String imgURL;
+
     private String name;
     private String name2;
     private String name3;
@@ -9,23 +11,30 @@ public class SearchData {
     private String name5;
     private String name6;
 
-    public SearchData(int iv_image, String name, String name2, String name3, String name4, String name5, String name6) {
-        this.iv_image = iv_image;
+    private String documentID;
+
+
+    public SearchData(String imgURL, String name, String name2, String name3, String name4, String name5, String name6, String documentID) {
+        this.imgURL = imgURL;
         this.name = name;
         this.name2 = name2;
         this.name3 = name3;
         this.name4 = name4;
         this.name5 = name5;
         this.name6 = name6;
+        this.documentID = documentID;
+
     }
 
-    public int getIv_image() {
-        return iv_image;
+    public String getImgURL() {
+        return imgURL;
     }
 
-    public void setIv_image(int iv_image) {
-        this.iv_image = iv_image;
+
+    public void setImgURL(String iv_image) {
+        this.imgURL = imgURL;
     }
+
 
     public String getName() {
         return name;
@@ -74,4 +83,13 @@ public class SearchData {
     public void setName6(String name6) {
         this.name6 = name6;
     }
+
+    public String getDocumentID() {
+        return documentID;
+    }
+
+    public void setDocumentID(String documentID) {
+        this.documentID = documentID;
+    }
+
 }

@@ -11,31 +11,37 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.Gonggumanman">
-        <activity android:name=".PostActivity"/>
+
         <activity
             android:name=".LoginActivity"
             android:exported="true">
             android:label="LoginActivity">
-                <intent-filter>
-                    <action android:name="android.intent.action.MAIN" />
-                    <category android:name="android.intent.category.LAUNCHER" />
-                </intent-filter>
+
         </activity>
-        <activity android:name=".JoinActivity"/>
+        <activity android:name=".JoinActivity" />
 
         <activity
-            android:name=".BottomNavigationActivity"/>
-<!--            android:exported="true"-->
-<!--            android:label="@string/title_activity_bottom_navigation">-->
-<!--            <intent-filter>-->
-<!--                <action android:name="android.intent.action.MAIN" />-->
-<!--                <category android:name="android.intent.category.LAUNCHER" />-->
-<!--            </intent-filter>-->
+            android:name=".BottomNavigationActivity"
+            android:exported="true">
+
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+
+        </activity>
+        <!--            android:exported="true"-->
+        <!--            android:label="@string/title_activity_bottom_navigation">-->
+        <!--            <intent-filter>-->
+        <!--                <action android:name="android.intent.action.MAIN" />-->
+        <!--                <category android:name="android.intent.category.LAUNCHER" />-->
+        <!--            </intent-filter>-->
+
 
         <activity
             android:name=".searchTitle.SearchActivity"
             android:exported="false" />
-        <activity android:name=".FeatureAttend"/>
+        <activity android:name=".FeatureAttend" />
 
     </application>
 
