@@ -159,6 +159,41 @@ public class FeatureAttend extends AppCompatActivity {
 
             }
         });
+
+
+        db.collection("users")
+                .get()
+                .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
+                    @Override
+                    public void onComplete(@NonNull Task<QuerySnapshot> task) {
+                        if (task.isSuccessful()) {
+                            for (QueryDocumentSnapshot document : task.getResult()) {
+
+//                                Log.d("feature-attend", "햔재 UID: " + UID);
+
+                                if (document.getId().toString().equals(UID)) {
+                                    Log.d("feature-attend", document.getId() + " => " + document.getData());
+                                    Log.d("feature-attend", document.getId() + " => " + document.getData());
+
+
+                                    List<String> attend_post = (List<String>) document.get("attend_post");
+                                    Log.d("feature-attend", "attend_post->" + attend_post);
+
+
+                                    List<String> like_post
+                                            = (List<String>) document.get("attend_post");
+                                    Log.d("feature-attend", "like_post->" + like_post
+                                    );
+
+                                }
+                            }
+                        } else {
+                            Log.d("feature-attend", "Error getting documents: ", task.getException());
+                        }
+                    }
+                });
+
+
     }
 
     public void Update() {
