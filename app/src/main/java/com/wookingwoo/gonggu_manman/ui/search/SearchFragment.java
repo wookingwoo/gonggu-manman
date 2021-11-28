@@ -23,6 +23,7 @@ import com.google.firebase.firestore.QuerySnapshot;
 import com.wookingwoo.gonggu_manman.R;
 
 import java.util.ArrayList;
+import java.util.List;
 
 public class SearchFragment extends Fragment {
 
@@ -178,11 +179,17 @@ public class SearchFragment extends Fragment {
                                         Log.d("get-posts-search", "documentID->" + documentID);
 
 
+                                        List<String> method
+                                                = (List<String>) document.get("method");
+                                        Log.d("get-posts-search", "method->" + method
+                                        );
+
+
 //                                        카테고리와, 지역 if문으로 비교해서 조건 추가
                                         if ((postsTitle != null) && (!postsTitle.equals("")) && (postsImage != null) && (!postsImage.equals(""))) {
 
 
-                                            SearchData mainData = new SearchData(postsImage, postsTitle, postsCategory, "지역", "택배/직거래", joinStr + "/" + recruitNum, postsPrice + "원", documentID);
+                                            SearchData mainData = new SearchData(postsImage, postsTitle, postsCategory, "지역", method.toString(), joinStr + "/" + recruitNum, postsPrice + "원", documentID);
                                             arrayList.add(mainData);
                                             mainAdapter.notifyDataSetChanged();
 
