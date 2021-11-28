@@ -14,6 +14,7 @@ import android.widget.Button;
 import android.widget.CompoundButton;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnFailureListener;
@@ -21,12 +22,19 @@ import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.firestore.DocumentReference;
+import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.QueryDocumentSnapshot;
 import com.google.firebase.firestore.QuerySnapshot;
 
 import com.bumptech.glide.Glide;
 import com.google.firebase.firestore.WriteBatch;
+
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
 public class FeatureAttend extends AppCompatActivity {
     ScaleAnimation scaleAnimation;
@@ -39,6 +47,9 @@ public class FeatureAttend extends AppCompatActivity {
     String documentID;
     boolean check;
     String postsJoin;
+    String postsRecruit;
+    String U
+    ArrayList<String> attend;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -72,6 +83,7 @@ public class FeatureAttend extends AppCompatActivity {
             }
         });
 
+        UID = firebaseAuth.getCurrentUser().getUid();
         db.collection("posts").get()
                 .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
                     @Override
@@ -92,7 +104,7 @@ public class FeatureAttend extends AppCompatActivity {
                                 String postsTitle = (String) document.get("title");
                                 postsJoin = (String) document.get("join");
                                 String postsImage = (String) document.get("image");
-                                String postsRecruit = (String) document.get("recruit");
+                                postsRecruit = (String) document.get("recruit");
                                 String postsWriter = (String) document.get("writer");
                                 String postsDetail = (String) document.get("detail");
 
@@ -116,15 +128,21 @@ public class FeatureAttend extends AppCompatActivity {
         join_btn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-
+                Log.d("TAG", UID);
 
                 if (!check) {
                     postsJoin = String.valueOf(Integer.parseInt(postsJoin) + 1);
+                    int total = Integer.parseInt(postsRecruit);
                     int trans = Integer.parseInt(postsJoin);
-                    String joinNum = Integer.toString(trans);
-                    join.setText(joinNum);
-                    join_btn.setText("참가 취소");
-                    check = true;
+                    if(trans>total){
+                        Toast.makeText(FeatureAttend.this, "참여인원이 꽉 찼습니다. 다음에 만나요~" , Toast.LENGTH_LONG).show();
+                    }
+                    else{
+                        String joinNum = Integer.toString(trans);
+                        join.setText(joinNum);
+                        join_btn.setText("참가 취소");
+                        check = true;
+                    }
                 } else {
                     postsJoin = String.valueOf(Integer.parseInt(postsJoin) - 1);
                     int trans = Integer.parseInt(postsJoin);
@@ -156,5 +174,16 @@ public class FeatureAttend extends AppCompatActivity {
 
             }
         });
+    }
+    public void Update(){
+        DocumentReference user = db.collection("users").document(UID);
+        user
+                .update("attend_list", attend)
+                .addOnSuccessListener(new OnSuccessListener<Void>() {
+                    @Override
+                    public void onSuccess(Void aVoid) {
+                        Log.d("FeatureAttend-log", "DocumentSnapshot successfully updated!");
+                    }
+                });
     }
 }
