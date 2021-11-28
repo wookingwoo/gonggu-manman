@@ -7,8 +7,8 @@
 
     <ImageView
         android:id="@+id/imageView2"
-        android:layout_width="412dp"
-        android:layout_height="246dp"
+        android:layout_width="402dp"
+        android:layout_height="192dp"
         android:contentDescription="@string/app_name"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -45,14 +45,14 @@
         android:layout_width="49dp"
         android:layout_height="40dp"
         android:layout_marginStart="96dp"
-        android:layout_marginTop="296dp"
+        android:layout_marginTop="8dp"
         android:background="@drawable/ic_heart_button"
         android:checked="false"
         android:text=""
         android:textOff=""
         android:textOn=""
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textView"
         tools:ignore="SpeakableTextPresentCheck,TouchTargetSizeCheck" />
 
     <TextView
@@ -103,7 +103,7 @@
         android:id="@+id/materialDivider"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="364dp"
+        android:layout_marginTop="300dp"
         app:dividerInsetEnd="16dp"
         app:dividerInsetStart="16dp"
         app:layout_constraintEnd_toEndOf="parent"
@@ -116,7 +116,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="8dp"
-        android:layout_marginTop="52dp"
+        android:layout_marginTop="56dp"
         android:text="@string/heart"
         android:textSize="24sp"
         app:layout_constraintStart_toEndOf="@+id/button"
@@ -129,7 +129,7 @@
         android:layout_marginStart="16dp"
         android:layout_marginTop="20dp"
         android:text="@string/title"
-        android:textSize="34sp"
+        android:textSize="28sp"
         android:textStyle="bold"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/materialDivider" />
@@ -141,7 +141,7 @@
         android:layout_marginStart="16dp"
         android:layout_marginTop="20dp"
         android:text="@string/context"
-        android:textSize="20sp"
+        android:textSize="18sp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/Title" />
 
