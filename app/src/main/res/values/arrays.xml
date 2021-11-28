@@ -2,6 +2,7 @@
 <resources>
     <string-array name="spinner_region">
         <item></item>
+        <item>선택</item>
         <item>서울특별시</item>
         <item>부산광역시</item>
         <item>대구광역시</item>
