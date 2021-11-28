@@ -51,7 +51,7 @@ public class CategoryAdapter extends RecyclerView.Adapter<CategoryAdapter.Custom
             @Override
             public void onClick(View view) {
                 String curName = holder.tv_name.getText().toString();
-                Toast.makeText(view.getContext(), curName, Toast.LENGTH_SHORT).show();
+                Toast.makeText(view.getContext(), "Search 메뉴에서 선택 가능해요~: " + curName, Toast.LENGTH_SHORT).show();
 
                 Log.i("category", "onClick: " + curName);
             }
@@ -64,7 +64,7 @@ public class CategoryAdapter extends RecyclerView.Adapter<CategoryAdapter.Custom
             public boolean onLongClick(View view) {
                 String curName = holder.tv_name.getText().toString();
 
-                Toast.makeText(view.getContext(), "롱클릭", Toast.LENGTH_SHORT).show();
+                Toast.makeText(view.getContext(), curName, Toast.LENGTH_SHORT).show();
                 Log.i("category", "LongClick: " + curName);
 
                 return true;
