@@ -49,6 +49,7 @@ public class FeatureAttend extends AppCompatActivity {
     String postsJoin;
     String postsRecruit;
     String UID;
+    ArrayList<String> attend;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -68,13 +69,10 @@ public class FeatureAttend extends AppCompatActivity {
         Intent intent = getIntent(); /*데이터 수신*/
         documentID = intent.getExtras().getString("documentID");
 
-
         scaleAnimation.setDuration(500);
         bounceInterpolator = new BounceInterpolator();
         scaleAnimation.setInterpolator(bounceInterpolator);
-
         button_favorite = findViewById(R.id.button);
-
         button_favorite.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(CompoundButton compoundButton, boolean isChecked) {
@@ -142,15 +140,14 @@ public class FeatureAttend extends AppCompatActivity {
                     postsJoin = String.valueOf(Integer.parseInt(postsJoin) + 1);
                     int total = Integer.parseInt(postsRecruit);
                     int trans = Integer.parseInt(postsJoin);
-                    if(trans>total){
-                        Toast.makeText(FeatureAttend.this, "참여인원이 꽉 찼습니다. 다음에 만나요~" , Toast.LENGTH_LONG).show();
-                    }
-                    else{
+                    if (trans > total) {
+                        Toast.makeText(FeatureAttend.this, "참여인원이 꽉 찼습니다. 다음에 만나요~", Toast.LENGTH_LONG).show();
+                    } else {
                         String joinNum = Integer.toString(trans);
                         join.setText(joinNum);
                         join_btn.setText("참가 취소");
-                        check = true;
                         Update();
+                        check = true;
                     }
                 } else {
                     postsJoin = String.valueOf(Integer.parseInt(postsJoin) - 1);
@@ -158,8 +155,8 @@ public class FeatureAttend extends AppCompatActivity {
                     String joinNum = Integer.toString(trans);
                     join.setText(joinNum);
                     join_btn.setText("공구 참여");
-                    check = false;
                     Update();
+                    check = false;
                 }
                 Log.d("FeatureAttend-log", "postsJoin: " + postsJoin);
             }else{
@@ -169,11 +166,12 @@ public class FeatureAttend extends AppCompatActivity {
         });
     }
     // firestore 업데이트
-    public void Update(){
+    public void Update() {
         DocumentReference postsID = db.collection("posts").document(documentID);
 
         postsID
                 .update("join", postsJoin)
+
                 .addOnSuccessListener(new OnSuccessListener<Void>() {
                     @Override
                     public void onSuccess(Void aVoid) {
