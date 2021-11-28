@@ -53,13 +53,13 @@ public class CreateFragment extends Fragment {
     FirebaseAuth firebaseAuth;
     TextInputEditText title, recruit, price, detail;
     ChipGroup chipGroup;
-    TextView category, wordcount;
+    TextView wordcount;
     EditText imgUrl;
     Spinner spinnerCate;
     Button saveBtn;
-    String userUid;
+    String userUid, category, city, sigungu;
 
-    private Spinner spinnerCity, spinnerSigungu, spinnerDong;
+    private Spinner spinnerCity, spinnerSigungu;
     private ArrayAdapter<String> arrayAdapter;
     public static final String EXTRA_ADDRESS = "address";
 
@@ -72,7 +72,6 @@ public class CreateFragment extends Fragment {
 
 
         title = (TextInputEditText) v.findViewById(R.id.post_title);
-        category = (TextView) v.findViewById(R.id.post_cate_selected);
         wordcount = (TextView) v.findViewById(R.id.post_wordcount);
         recruit = (TextInputEditText) v.findViewById(R.id.post_recruit);
         price = (TextInputEditText) v.findViewById(R.id.post_price);
@@ -103,22 +102,22 @@ public class CreateFragment extends Fragment {
                 }
             });
 
-            ArrayAdapter<String> adapter = new ArrayAdapter<String>(getActivity().getApplicationContext(), android.R.layout.simple_spinner_item, cateList);
-            adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-            spinnerCate.setAdapter(adapter);
-            adapter.notifyDataSetChanged();
+            ArrayAdapter<CharSequence> adapter;
 
+            adapter = ArrayAdapter.createFromResource(getActivity(), R.array.categories, android.R.layout.simple_spinner_dropdown_item);
+            adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+
+            spinnerCate.setAdapter(adapter);
             spinnerCate.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+
                 @Override
                 public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
-                    category.setText(spinnerCate.getSelectedItem().toString());
-                    Toast.makeText(getActivity(), cateList.get(i), Toast.LENGTH_SHORT).show();
-
+                    category = spinnerCate.getSelectedItem().toString();
+                    Log.d(TAG, category + "category selected");
                 }
 
                 @Override
                 public void onNothingSelected(AdapterView<?> adapterView) {
-
                 }
             });
 
@@ -126,9 +125,9 @@ public class CreateFragment extends Fragment {
             arrayAdapter = new ArrayAdapter<String>(getActivity(), android.R.layout.simple_spinner_item, (String[]) getResources().getStringArray(R.array.spinner_region));
             arrayAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
             spinnerCity.setAdapter(arrayAdapter);
+            spinnerCity.setSelection(0);
 
             spinnerSigungu = (Spinner) v.findViewById(R.id.post_spinner_sigungu);
-            spinnerDong = (Spinner) v.findViewById(R.id.post_spinner_dong);
 
             initAddressSpinner();
 
@@ -202,6 +201,8 @@ public class CreateFragment extends Fragment {
                 }
             });
             AlertDialog stateDlg = builder.create();
+            stateDlg.setCancelable(false);
+            stateDlg.setCanceledOnTouchOutside(false);
             stateDlg.show();
         }
 
@@ -282,89 +283,6 @@ public class CreateFragment extends Fragment {
         spinnerSigungu.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-                // 서울특별시 선택시
-                if (spinnerCity.getSelectedItemPosition() == 1 && spinnerSigungu.getSelectedItemPosition() > -1) {
-                    switch (position) {
-                        //25
-                        case 0:
-                            setDongSpinnerAdapterItem(R.array.spinner_region_seoul_gangnam);
-                            break;
-                        case 1:
-                            setDongSpinnerAdapterItem(R.array.spinner_region_seoul_gangdong);
-                            break;
-                        case 2:
-                            setDongSpinnerAdapterItem(R.array.spinner_region_seoul_gangbuk);
-                            break;
-                        case 3:
-                            setDongSpinnerAdapterItem(R.array.spinner_region_seoul_gangseo);
-                            break;
-                        case 4:
-                            setDongSpinnerAdapterItem(R.array.spinner_region_seoul_gwanak);
-                            break;
-                        case 5:
-                            setDongSpinnerAdapterItem(R.array.spinner_region_seoul_gwangjin);
-                            break;
-                        case 6:
-                            setDongSpinnerAdapterItem(R.array.spinner_region_seoul_guro);
-                            break;
-                        case 7:
-                            setDongSpinnerAdapterItem(R.array.spinner_region_seoul_geumcheon);
-                            break;
-                        case 8:
-                            setDongSpinnerAdapterItem(R.array.spinner_region_seoul_nowon);
-                            break;
-                        case 9:
-                            setDongSpinnerAdapterItem(R.array.spinner_region_seoul_dobong);
-                            break;
-                        case 10:
-                            setDongSpinnerAdapterItem(R.array.spinner_region_seoul_dongdaemun);
-                            break;
-                        case 11:
-                            setDongSpinnerAdapterItem(R.array.spinner_region_seoul_dongjag);
-                            break;
-                        case 12:
-                            setDongSpinnerAdapterItem(R.array.spinner_region_seoul_mapo);
-                            break;
-                        case 13:
-                            setDongSpinnerAdapterItem(R.array.spinner_region_seoul_seodaemun);
-                            break;
-                        case 14:
-                            setDongSpinnerAdapterItem(R.array.spinner_region_seoul_seocho);
-                            break;
-                        case 15:
-                            setDongSpinnerAdapterItem(R.array.spinner_region_seoul_seongdong);
-                            break;
-                        case 16:
-                            setDongSpinnerAdapterItem(R.array.spinner_region_seoul_seongbuk);
-                            break;
-                        case 17:
-                            setDongSpinnerAdapterItem(R.array.spinner_region_seoul_songpa);
-                            break;
-                        case 18:
-                            setDongSpinnerAdapterItem(R.array.spinner_region_seoul_yangcheon);
-                            break;
-                        case 19:
-                            setDongSpinnerAdapterItem(R.array.spinner_region_seoul_yeongdeungpo);
-                            break;
-                        case 20:
-                            setDongSpinnerAdapterItem(R.array.spinner_region_seoul_yongsan);
-                            break;
-                        case 21:
-                            setDongSpinnerAdapterItem(R.array.spinner_region_seoul_eunpyeong);
-                            break;
-                        case 22:
-                            setDongSpinnerAdapterItem(R.array.spinner_region_seoul_jongno);
-                            break;
-                        case 23:
-                            setDongSpinnerAdapterItem(R.array.spinner_region_seoul_jung);
-                            break;
-                        case 24:
-                            setDongSpinnerAdapterItem(R.array.spinner_region_seoul_jungnanggu);
-                            break;
-                    }
-                } else {
-
-                }
 
             }
 
@@ -382,25 +300,11 @@ public class CreateFragment extends Fragment {
             arrayAdapter = null;
         }
 
-        if (spinnerCity.getSelectedItemPosition() > 1) {
-            spinnerDong.setAdapter(null);
-        }
-
         arrayAdapter = new ArrayAdapter<String>(getActivity(), android.R.layout.simple_spinner_item, (String[]) getResources().getStringArray(array_resource));
         arrayAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         spinnerSigungu.setAdapter(arrayAdapter);
     }
 
-    private void setDongSpinnerAdapterItem(int array_resource) {
-        if (arrayAdapter != null) {
-            spinnerDong.setAdapter(null);
-            arrayAdapter = null;
-        }
-
-        arrayAdapter = new ArrayAdapter<String>(getActivity(), android.R.layout.simple_spinner_item, (String[]) getResources().getStringArray(array_resource));
-        arrayAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-        spinnerDong.setAdapter(arrayAdapter);
-    }
 
 
     private void getChipGroupValues() {
@@ -424,7 +328,9 @@ public class CreateFragment extends Fragment {
 
     private void uploadData() {
         final String titleStr = title.getText().toString();
-        final String cateStr = category.getText().toString();
+        final String cateStr = spinnerCate.getSelectedItem().toString();
+        final String cityStr = spinnerCity.getSelectedItem().toString();
+        final String sigunguStr = spinnerSigungu.getSelectedItem().toString();
         final String recruitStr = recruit.getText().toString().trim();
         final String priceStr = price.getText().toString().trim();
         final String detailStr = detail.getText().toString();
@@ -433,7 +339,7 @@ public class CreateFragment extends Fragment {
         final String writer = userUid;
         final List<String> method = selectedChipList;
 
-        CreateInfo createInfo = new CreateInfo(titleStr, cateStr, joinStr, recruitStr, priceStr, detailStr, imgStr, method, writer);
+        CreateInfo createInfo = new CreateInfo(titleStr, cateStr, cityStr, sigunguStr, joinStr, recruitStr, priceStr, detailStr, imgStr, method, writer);
         uploader(createInfo);
 
     }
