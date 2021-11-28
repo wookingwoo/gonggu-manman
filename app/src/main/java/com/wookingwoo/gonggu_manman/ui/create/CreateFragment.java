@@ -43,6 +43,7 @@ import com.wookingwoo.gonggu_manman.databinding.FragmentCreateBinding;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.regex.Pattern;
 
 public class CreateFragment extends Fragment {
 
@@ -146,11 +147,6 @@ public class CreateFragment extends Fragment {
                         title.requestFocus();
                         return;
                     }
-                    if (TextUtils.isEmpty(recruit.getText().toString())) {
-                        recruit.setError("최소 모집 인원을 입력해주세요");
-                        recruit.requestFocus();
-                        return;
-                    }
                     if (TextUtils.isEmpty(price.getText().toString())) {
                         price.setError("가격 정보를 입력해주세요");
                         price.requestFocus();
@@ -159,6 +155,15 @@ public class CreateFragment extends Fragment {
                     if (TextUtils.isEmpty(detail.getText().toString())) {
                         detail.setError("본문 내용을 입려해주세요");
                         detail.requestFocus();
+                        return;
+                    }
+                    if (!Pattern.matches("^[0-9]*$", recruit.getText().toString())) {
+                        recruit.setError("숫자로 입력해주세요");
+                        recruit.requestFocus();
+                        return;
+                    }if (!Pattern.matches("^[0-9]*$", price.getText().toString())) {
+                        price.setError("숫자로 입력해주세요");
+                        price.requestFocus();
                         return;
                     }
                     getChipGroupValues();
