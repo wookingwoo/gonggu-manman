@@ -48,7 +48,7 @@ public class FeatureAttend extends AppCompatActivity {
     boolean check;
     String postsJoin;
     String postsRecruit;
-    String U
+    String UID;
     ArrayList<String> attend;
 
     @Override
@@ -142,6 +142,7 @@ public class FeatureAttend extends AppCompatActivity {
                         join.setText(joinNum);
                         join_btn.setText("참가 취소");
                         check = true;
+                        Update();
                     }
                 } else {
                     postsJoin = String.valueOf(Integer.parseInt(postsJoin) - 1);
@@ -150,39 +151,31 @@ public class FeatureAttend extends AppCompatActivity {
                     join.setText(joinNum);
                     join_btn.setText("공구 참여");
                     check = false;
+                    Update();
                 }
                 Log.d("FeatureAttend-log", "postsJoin: " + postsJoin);
 
 
                 // firestore 업데이트
-                DocumentReference postsID = db.collection("posts").document(documentID);
-
-                postsID
-                        .update("join", postsJoin)
-                        .addOnSuccessListener(new OnSuccessListener<Void>() {
-                            @Override
-                            public void onSuccess(Void aVoid) {
-                                Log.d("FeatureAttend-log", "DocumentSnapshot successfully updated!");
-                            }
-                        })
-                        .addOnFailureListener(new OnFailureListener() {
-                            @Override
-                            public void onFailure(@NonNull Exception e) {
-                                Log.w("FeatureAttend-log", "Error updating document", e);
-                            }
-                        });
 
             }
         });
     }
     public void Update(){
-        DocumentReference user = db.collection("users").document(UID);
-        user
-                .update("attend_list", attend)
+        DocumentReference postsID = db.collection("posts").document(documentID);
+
+        postsID
+                .update("join", postsJoin)
                 .addOnSuccessListener(new OnSuccessListener<Void>() {
                     @Override
                     public void onSuccess(Void aVoid) {
                         Log.d("FeatureAttend-log", "DocumentSnapshot successfully updated!");
+                    }
+                })
+                .addOnFailureListener(new OnFailureListener() {
+                    @Override
+                    public void onFailure(@NonNull Exception e) {
+                        Log.w("FeatureAttend-log", "Error updating document", e);
                     }
                 });
     }
