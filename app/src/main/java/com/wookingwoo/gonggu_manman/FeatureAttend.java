@@ -69,13 +69,10 @@ public class FeatureAttend extends AppCompatActivity {
         Intent intent = getIntent(); /*데이터 수신*/
         documentID = intent.getExtras().getString("documentID");
 
-
         scaleAnimation.setDuration(500);
         bounceInterpolator = new BounceInterpolator();
         scaleAnimation.setInterpolator(bounceInterpolator);
-
         button_favorite = findViewById(R.id.button);
-
         button_favorite.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(CompoundButton compoundButton, boolean isChecked) {
@@ -83,8 +80,14 @@ public class FeatureAttend extends AppCompatActivity {
             }
         });
 
-        UID = firebaseAuth.getCurrentUser().getUid();
-        db.collection("posts").get()
+        if (firebaseAuth.getCurrentUser() != null) {
+            UID = firebaseAuth.getCurrentUser().getUid();
+        }
+        else{
+            UID = "";
+        }
+
+            db.collection("posts").get()
                 .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
                     @Override
                     public void onComplete(@NonNull Task<QuerySnapshot> task) {
@@ -130,6 +133,9 @@ public class FeatureAttend extends AppCompatActivity {
             public void onClick(View view) {
                 Log.d("TAG", UID);
 
+            if(firebaseAuth.getCurrentUser() != null){
+                UID = firebaseAuth.getCurrentUser().getUid();
+
                 if (!check) {
                     postsJoin = String.valueOf(Integer.parseInt(postsJoin) + 1);
                     int total = Integer.parseInt(postsRecruit);
@@ -140,8 +146,8 @@ public class FeatureAttend extends AppCompatActivity {
                         String joinNum = Integer.toString(trans);
                         join.setText(joinNum);
                         join_btn.setText("참가 취소");
-                        check = true;
                         Update();
+                        check = true;
                     }
                 } else {
                     postsJoin = String.valueOf(Integer.parseInt(postsJoin) - 1);
@@ -149,53 +155,17 @@ public class FeatureAttend extends AppCompatActivity {
                     String joinNum = Integer.toString(trans);
                     join.setText(joinNum);
                     join_btn.setText("공구 참여");
-                    check = false;
                     Update();
+                    check = false;
                 }
                 Log.d("FeatureAttend-log", "postsJoin: " + postsJoin);
-
-
-                // firestore 업데이트
-
+            }else{
+                Toast.makeText(FeatureAttend.this, "로그인 하셔야 이용하실 수 있습니다." , Toast.LENGTH_LONG).show();
+            }
             }
         });
-
-
-        db.collection("users")
-                .get()
-                .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
-                    @Override
-                    public void onComplete(@NonNull Task<QuerySnapshot> task) {
-                        if (task.isSuccessful()) {
-                            for (QueryDocumentSnapshot document : task.getResult()) {
-
-//                                Log.d("feature-attend", "햔재 UID: " + UID);
-
-                                if (document.getId().toString().equals(UID)) {
-                                    Log.d("feature-attend", document.getId() + " => " + document.getData());
-                                    Log.d("feature-attend", document.getId() + " => " + document.getData());
-
-
-                                    List<String> attend_post = (List<String>) document.get("attend_post");
-                                    Log.d("feature-attend", "attend_post->" + attend_post);
-
-
-                                    List<String> like_post
-                                            = (List<String>) document.get("like_post");
-                                    Log.d("feature-attend", "like_post->" + like_post
-                                    );
-
-                                }
-                            }
-                        } else {
-                            Log.d("feature-attend", "Error getting documents: ", task.getException());
-                        }
-                    }
-                });
-
-
     }
-
+    // firestore 업데이트
     public void Update() {
         DocumentReference postsID = db.collection("posts").document(documentID);
 
