@@ -15,7 +15,6 @@ import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.ImageView;
 import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -36,9 +35,7 @@ import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.QueryDocumentSnapshot;
 import com.google.firebase.firestore.QuerySnapshot;
 import com.wookingwoo.gonggu_manman.BottomNavigationActivity;
-import com.wookingwoo.gonggu_manman.CreateInfo;
 import com.wookingwoo.gonggu_manman.LoginActivity;
-import com.wookingwoo.gonggu_manman.PostActivity;
 import com.wookingwoo.gonggu_manman.R;
 import com.wookingwoo.gonggu_manman.databinding.FragmentCreateBinding;
 
@@ -48,10 +45,9 @@ import java.util.regex.Pattern;
 
 public class CreateFragment extends Fragment {
 
-    private CreateViewModel createViewModel;
     private FragmentCreateBinding binding;
 
-    private static final String TAG = PostActivity.class.getSimpleName();
+    private static final String TAG = CreateFragment.class.getSimpleName();
 
     FirebaseFirestore firebaseFirestore;
     FirebaseAuth firebaseAuth;
