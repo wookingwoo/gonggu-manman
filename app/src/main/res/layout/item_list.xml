@@ -95,31 +95,20 @@
         <ProgressBar
             android:id="@+id/progressBar"
             style="?android:attr/progressBarStyleHorizontal"
-            android:layout_width="150dp"
+            android:layout_width="123dp"
+            android:max = "100"
+            android:progress = "50"
             android:layout_height="match_parent"
             android:layout_weight="1" />
 
         <TextView
             android:id="@+id/name5"
-            android:layout_width="80dp"
+            android:layout_width="24dp"
             android:layout_height="match_parent"
+            android:layout_marginRight="20dp"
             android:layout_weight="1"
             android:gravity="center_horizontal"
             android:text="num / num" />
-
-        <Space
-            android:id="@+id/space5"
-            android:layout_width="60dp"
-            android:layout_height="match_parent"
-            android:layout_weight="1" />
-
-        <ImageButton
-            android:id="@+id/imageButton"
-            android:layout_width="20dp"
-            android:layout_height="match_parent"
-            android:layout_weight="1"
-            app:srcCompat="@android:drawable/btn_star_big_on"
-            tools:ignore="SpeakableTextPresentCheck,TouchTargetSizeCheck" />
 
         <TextView
             android:id="@+id/name6"
@@ -127,12 +116,21 @@
             android:layout_height="match_parent"
             android:layout_weight="1"
             android:gravity="center_horizontal"
-            android:text="num" />
+            android:text="price" />
 
-        <Space
-            android:id="@+id/space6"
-            android:layout_width="20dp"
+        <ToggleButton
+            android:id="@+id/ToggleButton"
+            android:layout_width="1dp"
             android:layout_height="match_parent"
-            android:layout_weight="1" />
+            android:layout_marginRight="10dp"
+            android:layout_marginBottom="5dp"
+            android:layout_weight="1"
+            android:background="@drawable/ic_heart_button"
+            android:checked="false"
+            android:text=""
+            android:textOff=""
+            android:textOn=""
+            tools:ignore="SpeakableTextPresentCheck,TouchTargetSizeCheck" />
+
     </LinearLayout>
 </LinearLayout>
