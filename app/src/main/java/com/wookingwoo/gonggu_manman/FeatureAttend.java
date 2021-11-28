@@ -49,7 +49,6 @@ public class FeatureAttend extends AppCompatActivity {
     String postsJoin;
     String postsRecruit;
     String UID;
-    ArrayList<String> attend;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -83,8 +82,14 @@ public class FeatureAttend extends AppCompatActivity {
             }
         });
 
-        UID = firebaseAuth.getCurrentUser().getUid();
-        db.collection("posts").get()
+        if (firebaseAuth.getCurrentUser() != null) {
+            UID = firebaseAuth.getCurrentUser().getUid();
+        }
+        else{
+            UID = "";
+        }
+
+            db.collection("posts").get()
                 .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
                     @Override
                     public void onComplete(@NonNull Task<QuerySnapshot> task) {
@@ -130,6 +135,9 @@ public class FeatureAttend extends AppCompatActivity {
             public void onClick(View view) {
                 Log.d("TAG", UID);
 
+            if(firebaseAuth.getCurrentUser() != null){
+                UID = firebaseAuth.getCurrentUser().getUid();
+
                 if (!check) {
                     postsJoin = String.valueOf(Integer.parseInt(postsJoin) + 1);
                     int total = Integer.parseInt(postsRecruit);
@@ -154,13 +162,13 @@ public class FeatureAttend extends AppCompatActivity {
                     Update();
                 }
                 Log.d("FeatureAttend-log", "postsJoin: " + postsJoin);
-
-
-                // firestore 업데이트
-
+            }else{
+                Toast.makeText(FeatureAttend.this, "로그인 하셔야 이용하실 수 있습니다." , Toast.LENGTH_LONG).show();
+            }
             }
         });
     }
+    // firestore 업데이트
     public void Update(){
         DocumentReference postsID = db.collection("posts").document(documentID);
 
