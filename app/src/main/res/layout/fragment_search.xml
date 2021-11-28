@@ -63,11 +63,12 @@
             android:layout_height="match_parent"
             android:layout_weight="1" />
 
-        <Button
+        <androidx.appcompat.widget.AppCompatButton
             android:id="@+id/btn1"
             android:layout_width="100dp"
             android:layout_height="match_parent"
             android:layout_weight="0.21"
+            android:background="@drawable/gonggu_gradient"
             android:text="검   색" />
 
         <Space
