@@ -20,6 +20,7 @@
 - 사용자가 입력한 Id / password가 firebase에 저장된 정보와 일치 시 메인 화면으로 이동
 - 회원가입 버튼 클릭 시 회원가입 페이지로 이동
 
+![Untitled](https://s3-us-west-2.amazonaws.com/secure.notion-static.com/0de6fa03-1677-4d3c-8c4f-1b99b6f45dfd/Untitled.png)
   ![Untitled](https://s3-us-west-2.amazonaws.com/secure.notion-static.com/0de6fa03-1677-4d3c-8c4f-1b99b6f45dfd/Untitled.png)
 
 ### 회원가입
@@ -35,7 +36,7 @@
 - 메인화면. 상단에 검색 기능 및 카테고리 분류
 - 사용자에게 추천할 만한 상품들을 Recomendation에 표시
 
-  ![홈화면.png](https://s3-us-west-2.amazonaws.com/secure.notion-static.com/4b9ae6f5-7f13-4496-96fb-53a3accf6760/홈화면.png)
+![홈화면](https://user-images.githubusercontent.com/39684946/143779526-978ce3aa-0500-4d63-9dff-be72a7d704f6.png)
 
 ### 검색화면
 
@@ -43,7 +44,7 @@
 - firebase에서 데이터 받아와 현재 공구 모집 상품 나열
 - 지역 품목 별 카테고리화 검색 기능 제공
 
-  ![Untitled](https://s3-us-west-2.amazonaws.com/secure.notion-static.com/0c756ea9-bc4a-4f78-8777-68b8c211622b/Untitled.png)
+![검색화면](https://user-images.githubusercontent.com/39684946/143779536-416e7010-450d-40a5-a740-cfc5c8684c36.png)
 
 ### 공구장터 생성
 
