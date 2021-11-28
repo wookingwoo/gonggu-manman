@@ -21,8 +21,6 @@ import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.QueryDocumentSnapshot;
 import com.google.firebase.firestore.QuerySnapshot;
 import com.wookingwoo.gonggu_manman.R;
-import com.wookingwoo.gonggu_manman.SearchAdapter;
-import com.wookingwoo.gonggu_manman.SearchData;
 
 import java.util.ArrayList;
 
@@ -181,7 +179,7 @@ public class SearchFragment extends Fragment {
 
 
 //                                        카테고리와, 지역 if문으로 비교해서 조건 추가
-                                        if ((postsTitle != null) && (!postsTitle.equals("")) && (postsImage != null) && (!postsImage.equals("")) && (joinNum < recruitNum)) {
+                                        if ((postsTitle != null) && (!postsTitle.equals("")) && (postsImage != null) && (!postsImage.equals(""))) {
 
 
                                             SearchData mainData = new SearchData(postsImage, postsTitle, postsCategory, "지역", "택배/직거래", joinStr + "/" + recruitNum, postsPrice + "원", documentID);

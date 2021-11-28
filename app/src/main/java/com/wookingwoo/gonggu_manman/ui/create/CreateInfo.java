@@ -1,4 +1,4 @@
-package com.wookingwoo.gonggu_manman;
+package com.wookingwoo.gonggu_manman.ui.create;
 
 import java.util.List;
 
