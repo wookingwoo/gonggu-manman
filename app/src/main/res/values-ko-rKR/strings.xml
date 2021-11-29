@@ -15,4 +15,6 @@
     <string name="title_dashboard">대시보드</string>
     <string name="title_notifications">알림</string>
     <string name="percent">/</string>
+    <string name="title_activity_bottom_navigation">BottomNavigationActivity</string>
+    <string name="title">Title</string>
 </resources>
