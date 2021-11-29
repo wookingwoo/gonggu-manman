@@ -15,7 +15,7 @@ https://youtu.be/aKcDV3a9i5k
 - minSdk: 21
 - targetSdk: 31
 
-## 화면 설명 (스샷)
+## 화면 설명
 
 ### 로그인
 
