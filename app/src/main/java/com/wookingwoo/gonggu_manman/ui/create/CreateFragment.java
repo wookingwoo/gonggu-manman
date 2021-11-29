@@ -57,7 +57,9 @@ public class CreateFragment extends Fragment {
     EditText imgUrl;
     Spinner spinnerCate;
     Button saveBtn;
-    String userUid, category, city, sigungu;
+    String userUid, category;
+    String city = "";
+    String sigungu = "";
 
     private Spinner spinnerCity, spinnerSigungu;
     private ArrayAdapter<String> arrayAdapter;
@@ -178,6 +180,10 @@ public class CreateFragment extends Fragment {
                         price.requestFocus();
                         return;
                     }
+                    if(spinnerCate.getSelectedItem().toString() == null) {
+                        Toast.makeText(getActivity(),"카테고리 선택을 해주세요", Toast.LENGTH_SHORT).show();
+                        return;
+                    }
                     getChipGroupValues();
                     uploadData();
                 }
@@ -283,6 +289,8 @@ public class CreateFragment extends Fragment {
         spinnerSigungu.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+                city = spinnerCity.getSelectedItem().toString();
+                sigungu = spinnerSigungu.getSelectedItem().toString();
 
             }
 
@@ -329,8 +337,8 @@ public class CreateFragment extends Fragment {
     private void uploadData() {
         final String titleStr = title.getText().toString();
         final String cateStr = spinnerCate.getSelectedItem().toString();
-        final String cityStr = spinnerCity.getSelectedItem().toString();
-        final String sigunguStr = spinnerSigungu.getSelectedItem().toString();
+        final String cityStr = city;
+        final String sigunguStr = sigungu;
         final String recruitStr = recruit.getText().toString().trim();
         final String priceStr = price.getText().toString().trim();
         final String detailStr = detail.getText().toString();
