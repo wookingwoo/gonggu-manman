@@ -1,4 +1,4 @@
-# What is MUNG-$SA
+## What is MUNG-$SA
 
 - 누구나 쉽고 빠르게 공동구매장 개설, 참여가 가능한 커뮤니티 서비스
 - 필요한 만큼의 물건을 보다 저렴한 가격으로 구매할 수 있는 사용자 중심의 공동구매 플랫폼 구현
@@ -6,16 +6,19 @@
 - 1인가구의 소비 트렌드 반영
 
 ## 시연 영상
+
 https://youtu.be/aKcDV3a9i5k
 
 ## 실행 환경 / 개발환경
 
-- java
-- 애뮬레이터 API레벨: 29 or 30
+- IDE: Android Studio
+- Language: Java
+- Emulator API Level: 29 or 30
+- Emulator device: Pixel 4
 - minSdk: 21
 - targetSdk: 31
 
-## 화면 설명 (스샷)
+## 화면 설명
 
 ### 로그인
 
@@ -36,7 +39,7 @@ https://youtu.be/aKcDV3a9i5k
 ### 홈화면
 
 - 메인화면. 상단에 검색 기능 및 카테고리 분류
-- 사용자에게 추천할 만한 상품들을 Recomendation에 표시
+- 사용자에게 추천할 만한 상품들을 Recommendation 표시
 
 ![홈화면](https://user-images.githubusercontent.com/39684946/143779526-978ce3aa-0500-4d63-9dff-be72a7d704f6.png)
 

@@ -65,6 +65,7 @@ public class FeatureAttend extends AppCompatActivity {
         TextView recruit = (TextView) findViewById(R.id.Recriut);
         TextView join = (TextView) findViewById(R.id.Join);
         Button join_btn = (Button) findViewById(R.id.button2);
+        TextView price = (TextView) findViewById(R.id.textView6);
 
         Intent intent = getIntent(); /*데이터 수신*/
         documentID = intent.getExtras().getString("documentID");
@@ -110,17 +111,20 @@ public class FeatureAttend extends AppCompatActivity {
                                 postsRecruit = (String) document.get("recruit");
                                 String postsWriter = (String) document.get("writer");
                                 String postsDetail = (String) document.get("detail");
+                                String postsPrice = (String) document.get("price");
 
 //                                Log.d("get-posts-firestore", "postsTitle->" + postsTitle);
 //                                Log.d("get-posts-firestore", "postsImage->" + postsImage);
 //                                Log.d("get-posts-firestore", "documentID->" + documentID);
 
                                 Glide.with(FeatureAttend.this).load(postsImage).into(load);
+                                String text_price= "가격 : " + postsPrice;
 
                                 join.setText(postsJoin);
                                 recruit.setText(postsRecruit);
                                 title.setText(postsTitle);
                                 context.setText(postsDetail);
+                                price.setText(text_price);
                                 break;
                             }
 
