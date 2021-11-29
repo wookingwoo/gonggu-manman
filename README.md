@@ -10,8 +10,9 @@ https://youtu.be/aKcDV3a9i5k
 
 ## 실행 환경 / 개발환경
 
-- java
-- 애뮬레이터 API레벨: 29 or 30
+- IDE: Android Studio
+- Language: Java
+- Emulator API Level: 29 or 30
 - minSdk: 21
 - targetSdk: 31
 
