@@ -59,8 +59,8 @@
         android:id="@+id/textView2"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="184dp"
-        android:layout_marginTop="12dp"
+        android:layout_marginStart="164dp"
+        android:layout_marginTop="20dp"
         android:text="@string/gonggu"
         android:textSize="24sp"
         app:layout_constraintStart_toEndOf="@+id/textView"
@@ -126,7 +126,7 @@
         android:id="@+id/Title"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="16dp"
+        android:layout_marginStart="20dp"
         android:layout_marginTop="20dp"
         android:text="@string/title"
         android:textSize="28sp"
@@ -138,8 +138,8 @@
         android:id="@+id/Context"
         android:layout_width="373dp"
         android:layout_height="wrap_content"
-        android:layout_marginStart="16dp"
-        android:layout_marginTop="20dp"
+        android:layout_marginStart="20dp"
+        android:layout_marginTop="56dp"
         android:text="@string/context"
         android:textSize="18sp"
         app:layout_constraintStart_toStartOf="parent"
@@ -167,5 +167,18 @@
         android:text="@string/join"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/materialDivider2" />
+
+    <TextView
+        android:id="@+id/textView6"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="20dp"
+        android:text="@string/price"
+        android:textSize="18sp"
+        app:layout_constraintBottom_toTopOf="@+id/Context"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/Title"
+        app:layout_constraintVertical_bias="0.468"
+        tools:ignore="MissingConstraints" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
