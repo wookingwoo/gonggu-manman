@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">뭉싸</string>
+    <string name="title_home">홈화면</string>
+    <string name="title_create">공구장터 생성</string>
+    <string name="user_name">user</string>
+    <string name="title_search">공구장터 검색</string>
+    <string name="title_community">커뮤니티</string>
+    <string name="title_mypage">마이페이지</string>
+    <string name="total_num">50</string>
+    <string name="present_num">10</string>
+    <string name="join">공구참여</string>
+    <string name="heart">찜하기</string>
+    <string name="gonggu">공구</string>
+    <string name="title_dashboard">대시보드</string>
+    <string name="title_notifications">알림</string>
+    <string name="percent">/</string>
+</resources>
