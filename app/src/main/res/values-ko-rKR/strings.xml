@@ -12,4 +12,7 @@
     <string name="join">공구참여</string>
     <string name="heart">찜하기</string>
     <string name="gonggu">공구</string>
+    <string name="title_dashboard">대시보드</string>
+    <string name="title_notifications">알림</string>
+    <string name="percent">/</string>
 </resources>
