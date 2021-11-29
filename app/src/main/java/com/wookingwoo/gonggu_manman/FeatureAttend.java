@@ -135,9 +135,7 @@ public class FeatureAttend extends AppCompatActivity {
         join_btn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Log.d("TAG", UID);
-
-            if(firebaseAuth.getCurrentUser() != null){
+            if(!UID.equals("")){
                 UID = firebaseAuth.getCurrentUser().getUid();
 
                 if (!check) {
