@@ -83,12 +83,11 @@ public class FeatureAttend extends AppCompatActivity {
 
         if (firebaseAuth.getCurrentUser() != null) {
             UID = firebaseAuth.getCurrentUser().getUid();
-        }
-        else{
+        } else {
             UID = "";
         }
 
-            db.collection("posts").get()
+        db.collection("posts").get()
                 .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
                     @Override
                     public void onComplete(@NonNull Task<QuerySnapshot> task) {
@@ -118,7 +117,7 @@ public class FeatureAttend extends AppCompatActivity {
 //                                Log.d("get-posts-firestore", "documentID->" + documentID);
 
                                 Glide.with(FeatureAttend.this).load(postsImage).into(load);
-                                String text_price= "가격 : " + postsPrice;
+                                String text_price = "가격 : " + postsPrice;
 
                                 join.setText(postsJoin);
                                 recruit.setText(postsRecruit);
@@ -137,38 +136,39 @@ public class FeatureAttend extends AppCompatActivity {
             public void onClick(View view) {
                 Log.d("TAG", UID);
 
-            if(firebaseAuth.getCurrentUser() != null){
-                UID = firebaseAuth.getCurrentUser().getUid();
+                if (firebaseAuth.getCurrentUser() != null) {
+                    UID = firebaseAuth.getCurrentUser().getUid();
 
-                if (!check) {
-                    postsJoin = String.valueOf(Integer.parseInt(postsJoin) + 1);
-                    int total = Integer.parseInt(postsRecruit);
-                    int trans = Integer.parseInt(postsJoin);
-                    if (trans > total) {
-                        Toast.makeText(FeatureAttend.this, "참여인원이 꽉 찼습니다. 다음에 만나요~", Toast.LENGTH_LONG).show();
+                    if (!check) {
+                        postsJoin = String.valueOf(Integer.parseInt(postsJoin) + 1);
+                        int total = Integer.parseInt(postsRecruit);
+                        int trans = Integer.parseInt(postsJoin);
+                        if (trans > total) {
+                            Toast.makeText(FeatureAttend.this, "참여인원이 꽉 찼습니다. 다음에 만나요~", Toast.LENGTH_LONG).show();
+                        } else {
+                            String joinNum = Integer.toString(trans);
+                            join.setText(joinNum);
+                            join_btn.setText("참가 취소");
+                            Update();
+                            check = true;
+                        }
                     } else {
+                        postsJoin = String.valueOf(Integer.parseInt(postsJoin) - 1);
+                        int trans = Integer.parseInt(postsJoin);
                         String joinNum = Integer.toString(trans);
                         join.setText(joinNum);
-                        join_btn.setText("참가 취소");
+                        join_btn.setText("공구 참여");
                         Update();
-                        check = true;
+                        check = false;
                     }
+                    Log.d("FeatureAttend-log", "postsJoin: " + postsJoin);
                 } else {
-                    postsJoin = String.valueOf(Integer.parseInt(postsJoin) - 1);
-                    int trans = Integer.parseInt(postsJoin);
-                    String joinNum = Integer.toString(trans);
-                    join.setText(joinNum);
-                    join_btn.setText("공구 참여");
-                    Update();
-                    check = false;
+                    Toast.makeText(FeatureAttend.this, "로그인 하셔야 이용하실 수 있습니다.", Toast.LENGTH_LONG).show();
                 }
-                Log.d("FeatureAttend-log", "postsJoin: " + postsJoin);
-            }else{
-                Toast.makeText(FeatureAttend.this, "로그인 하셔야 이용하실 수 있습니다." , Toast.LENGTH_LONG).show();
-            }
             }
         });
     }
+
     // firestore 업데이트
     public void Update() {
         DocumentReference postsID = db.collection("posts").document(documentID);
